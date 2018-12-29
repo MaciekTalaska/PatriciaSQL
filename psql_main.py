@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from patriciasql_main import Ui_MainWindow
-from db_settings import Ui_Dialog
+from db_settings import Ui_dbSettingsDialog
 
 import sys
 import db
@@ -29,7 +29,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
       def showSettings(self):
             dialog = QDialog()
-            dialog.ui = Ui_Dialog()
+            dialog.ui = Ui_dbSettingsDialog()
             dialog.ui.setupUi(dialog)
             dialog.exec_()
             dialog.show()
