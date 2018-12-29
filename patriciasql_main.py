@@ -95,5 +95,6 @@ class Ui_MainWindow(object):
         self.actionQuit.setText(_translate("MainWindow", "&Quit"))
         self.actionExecute.setText(_translate("MainWindow", "Execute"))
         self.actionExecute.setToolTip(_translate("MainWindow", "Executes Query"))
+        self.actionExecute.setShortcut(_translate("MainWindow", "Ctrl+Return"))
         self.actionSettings.setText(_translate("MainWindow", "Settings"))
 

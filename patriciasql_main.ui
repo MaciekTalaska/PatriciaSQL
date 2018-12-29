@@ -142,6 +142,9 @@
    <property name="toolTip">
     <string>Executes Query</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Return</string>
+   </property>
   </action>
   <action name="actionSettings">
    <property name="text">
