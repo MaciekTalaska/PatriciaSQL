@@ -7,13 +7,14 @@ class PostgreSQL:
         self.userName = userName
         self.password = password
         self.databaseName = 'postgres'
+        self.connection = self.__connect__()
 
-    def getModel(self):
-        db = self.__connect__()
+    def getModel(self, query='"SELECT datname FROM pg_database WHERE datistemplate = false;"'):
+        #db = self.__connect__()
         model = QtSql.QSqlQueryModel()
-        model.setQuery("SELECT datname FROM pg_database WHERE datistemplate = false;")
+        model.setQuery(query)
         return model
-
+    
     def __connect__(self):
         db = QtSql.QSqlDatabase.addDatabase("QPSQL")
         db.setHostName(self.hostName)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'patriciasql-main.ui'
+# Form implementation generated from reading ui file 'patriciasql_main.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.2
 #
@@ -63,6 +63,8 @@ class Ui_MainWindow(object):
         self.action.setObjectName("action")
         self.actionQuit = QtWidgets.QAction(MainWindow)
         self.actionQuit.setObjectName("actionQuit")
+        self.actionExecute = QtWidgets.QAction(MainWindow)
+        self.actionExecute.setObjectName("actionExecute")
         self.menusomething.addAction(self.actionOpen)
         self.menusomething.addAction(self.actionSave)
         self.menusomething.addSeparator()
@@ -70,6 +72,7 @@ class Ui_MainWindow(object):
         self.menuHelp.addAction(self.actionAbout)
         self.menubar.addAction(self.menusomething.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
+        self.toolBar.addAction(self.actionExecute)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -87,4 +90,7 @@ class Ui_MainWindow(object):
         self.actionSave.setText(_translate("MainWindow", "&Save..."))
         self.action.setText(_translate("MainWindow", "--"))
         self.actionQuit.setText(_translate("MainWindow", "&Quit"))
+        self.actionExecute.setText(_translate("MainWindow", "Execute"))
+        self.actionExecute.setToolTip(_translate("MainWindow", "Executes Query"))
+        self.actionExecute.setShortcut(_translate("MainWindow", "Ctrl+Return"))
 
