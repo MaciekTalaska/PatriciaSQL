@@ -9,8 +9,7 @@ class PostgreSQL:
         self.databaseName = 'postgres'
         self.connection = self.__connect__()
 
-    def getModel(self, query='"SELECT datname FROM pg_database WHERE datistemplate = false;"'):
-        #db = self.__connect__()
+    def getModel(self, query='SELECT datname FROM pg_database WHERE datistemplate = false;'):
         model = QtSql.QSqlQueryModel()
         model.setQuery(query)
         return model

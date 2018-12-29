@@ -16,9 +16,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # wire up signals & slots
             self.actionQuit.triggered.connect(self.exitApplication)
             self.actionExecute.triggered.connect(self.executeQuery)
-#            self.actionAbout.triggered.connect(self.showMessage)
-            p = db.PostgreSQL()
-            model = p.getModel()
+            self.db = db.PostgreSQL()
+            model = self.db.getModel()
             self.tableView.setModel(model)
             self.tableView.show()
 
@@ -27,8 +26,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
       def executeQuery(self):
             queryText = self.sqlEditorArea.toPlainText()
-            p = db.PostgreSQL()
-            model = p.getModel(queryText)
+            model = self.db.getModel(queryText)
             self.tableView.setModel(model)
             self.tableView.show()
 
