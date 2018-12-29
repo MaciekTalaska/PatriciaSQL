@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from patriciasql_main import Ui_MainWindow
+from db_settings import Ui_Dialog
 
 import sys
 import db
@@ -16,6 +17,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # wire up signals & slots
             self.actionQuit.triggered.connect(self.exitApplication)
             self.actionExecute.triggered.connect(self.executeQuery)
+            self.actionSettings.triggered.connect(self.showSettings)
+            # this is temporaty and should be removed soon
             self.db = db.PostgreSQL()
             model = self.db.getModel()
             self.tableView.setModel(model)
@@ -23,6 +26,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
       def exitApplication(self):
 			sys.exit(0)
+
+      def showSettings(self):
+            dialog = QDialog()
+            dialog.ui = Ui_Dialog()
+            dialog.ui.setupUi(dialog)
+            dialog.exec_()
+            dialog.show()
 
       def executeQuery(self):
             queryText = self.sqlEditorArea.toPlainText()

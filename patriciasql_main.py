@@ -65,7 +65,10 @@ class Ui_MainWindow(object):
         self.actionQuit.setObjectName("actionQuit")
         self.actionExecute = QtWidgets.QAction(MainWindow)
         self.actionExecute.setObjectName("actionExecute")
+        self.actionSettings = QtWidgets.QAction(MainWindow)
+        self.actionSettings.setObjectName("actionSettings")
         self.menusomething.addAction(self.actionOpen)
+        self.menusomething.addAction(self.actionSettings)
         self.menusomething.addAction(self.actionSave)
         self.menusomething.addSeparator()
         self.menusomething.addAction(self.actionQuit)
@@ -92,5 +95,5 @@ class Ui_MainWindow(object):
         self.actionQuit.setText(_translate("MainWindow", "&Quit"))
         self.actionExecute.setText(_translate("MainWindow", "Execute"))
         self.actionExecute.setToolTip(_translate("MainWindow", "Executes Query"))
-        self.actionExecute.setShortcut(_translate("MainWindow", "Ctrl+Return"))
+        self.actionSettings.setText(_translate("MainWindow", "Settings"))
 
