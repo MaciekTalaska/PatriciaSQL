@@ -13,7 +13,20 @@ class PostgreSQL:
         model = QtSql.QSqlQueryModel()
         model.setQuery(query)
         return model
-    
+
+    def closeCurrentConnection(self):
+        if self.db.isOpen():
+            self.db.close()
+
+    @staticmethod
+    def checkConnection(connArgs):
+        db = QtSql.QSqlDatabase.addDatabase("QPSQL")
+        db.setHostName(connArgs['host'])
+        db.setUserName(connArgs['user'])
+        db.setPassword(connArgs['password'])
+        db.open()
+        return db.isOpen()
+
     def __connect__(self):
         db = QtSql.QSqlDatabase.addDatabase("QPSQL")
         db.setHostName(self.hostName)

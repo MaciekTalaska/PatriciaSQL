@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>dbSettingsDialog</class>
  <widget class="QDialog" name="dbSettingsDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +29,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel</set>
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
   <widget class="QLineEdit" name="txtUserName">
@@ -58,8 +61,11 @@
      <height>32</height>
     </rect>
    </property>
+   <property name="text">
+    <string>127.0.0.1</string>
+   </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="txtPort">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -137,7 +143,7 @@
     <string>database name:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btnResetPort">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -150,7 +156,7 @@
     <string>Reset</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
+  <widget class="QLineEdit" name="txtdbName">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -163,7 +169,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btnBrowseDatabases">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -199,7 +205,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="btnTestConnection">
    <property name="geometry">
     <rect>
      <x>307</x>
@@ -218,11 +224,11 @@
   <tabstop>txtUserName</tabstop>
   <tabstop>txtPassword</tabstop>
   <tabstop>txtHostName</tabstop>
-  <tabstop>lineEdit_4</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>lineEdit_5</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton_3</tabstop>
+  <tabstop>txtPort</tabstop>
+  <tabstop>btnResetPort</tabstop>
+  <tabstop>txtdbName</tabstop>
+  <tabstop>btnBrowseDatabases</tabstop>
+  <tabstop>btnTestConnection</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -253,8 +259,8 @@
      <y>350</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
+     <x>309</x>
+     <y>33</y>
     </hint>
    </hints>
   </connection>

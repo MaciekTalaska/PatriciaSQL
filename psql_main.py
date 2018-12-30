@@ -4,7 +4,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from patriciasql_main import Ui_MainWindow
-from db_settings import Ui_dbSettingsDialog
+#from db_settings import Ui_dbSettingsDialog
+from db_settings_logic import DBSettingsDialog
 
 import sys
 import db
@@ -29,11 +30,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			sys.exit(0)
 
       def showSettings(self):
-            dialog = QDialog()
-            dialog.ui = Ui_dbSettingsDialog()
-            dialog.ui.setupUi(dialog)
+            dialog = DBSettingsDialog()
             dialog.exec_()
-            dialog.show()
+            print(dialog.getData())
 
       def executeQuery(self):
             queryText = self.sqlEditorArea.toPlainText()
