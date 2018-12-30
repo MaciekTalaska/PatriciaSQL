@@ -29,8 +29,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __connect2Database__(self, connProps):
         if (len(connProps))>=4:
             self.db = db.PostgreSQL(userName=connProps['user'], hostName=connProps['host'], password=connProps['password'], databaseName=connProps['db'])
+            self.lbldb.setText("connected to: " + str(connProps['db']))
         else:
             self.db = None
+            self.lbldb.setText("connected to: none")
 
     def showSettings(self):
          dialog = DBSettingsDialog()
@@ -45,10 +47,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             model = self.db.getModel(queryText)
             self.tableView.setModel(model)
             self.tableView.show()
+            self.lblstatus.setText("rows: " + str(model.rowCount()))
         else:
             msg = QMessageBox()
             msg.setText("Not connected to DB!")
             msg.exec_()
+            self.lblstatus.setText("rows: " + str(model.rowCount()))
 
 if __name__ == "__main__":
     app = QApplication([])
