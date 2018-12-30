@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "PatriciaSQL"))
         self.lbldb.setText(_translate("MainWindow", "connected to:"))
         self.lblstatus.setText(_translate("MainWindow", "rows:"))
         self.menusomething.setTitle(_translate("MainWindow", "Fi&le"))
