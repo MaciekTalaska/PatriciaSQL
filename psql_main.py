@@ -3,8 +3,9 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from patriciasql_main import Ui_MainWindow
-#from db_settings import Ui_dbSettingsDialog
+from PyQt5 import uic
+
+Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
 from db_settings_logic import DBSettingsDialog
 from config import PatriciaConfig
 
