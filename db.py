@@ -2,11 +2,11 @@ from PyQt5 import QtSql
 from PyQt5 import QtCore
 
 class PostgreSQL:
-    def __init__(self, hostName='127.0.0.1', userName='postgres', password='postgres'):
+    def __init__(self, hostName='127.0.0.1', userName='postgres', password='postgres', databaseName='postgres'):
         self.hostName = hostName
         self.userName = userName
         self.password = password
-        self.databaseName = 'postgres'
+        self.databaseName = databaseName
         self.connection = self.__connect__()
 
     def getModel(self, query='SELECT datname FROM pg_database WHERE datistemplate = false;'):

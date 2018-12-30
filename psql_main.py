@@ -20,15 +20,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.actionQuit.triggered.connect(self.exitApplication)
             self.actionExecute.triggered.connect(self.executeQuery)
             self.actionSettings.triggered.connect(self.showSettings)
-            self.db = db.PostgreSQL()
 
       def exitApplication(self):
 			sys.exit(0)
 
       def showSettings(self):
             dialog = DBSettingsDialog()
-            dialog.exec_()
-            print(dialog.getData())
+            retval = dialog.exec_()
+            if retval == 1:
+                  connProps = dialog.getData()
+                  self.db = db.PostgreSQL(userName=connProps['user'], hostName=connProps['host'], password=connProps['password'], databaseName=connProps['db'])
 
       def executeQuery(self):
             queryText = self.sqlEditorArea.toPlainText()

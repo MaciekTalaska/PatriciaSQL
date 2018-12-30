@@ -36,4 +36,4 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
 
 
     def getData(self):
-        return "sample data"
+        return self.createConnectionProperties()
