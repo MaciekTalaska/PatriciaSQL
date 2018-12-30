@@ -223,8 +223,9 @@
   <tabstop>txtHostName</tabstop>
   <tabstop>txtPort</tabstop>
   <tabstop>btnResetPort</tabstop>
-  <tabstop>btnBrowseDatabases</tabstop>
   <tabstop>btnTestConnection</tabstop>
+  <tabstop>cbxDBs</tabstop>
+  <tabstop>btnBrowseDatabases</tabstop>
  </tabstops>
  <resources/>
  <connections>
