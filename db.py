@@ -30,6 +30,23 @@ class PostgreSQL:
             db.close()
         return status
 
+    @staticmethod
+    def getAvailableDatabases(connArgs):
+        db = QtSql.QSqlDatabase.addDatabase("QPSQL")
+        db.setHostName(connArgs['host'])
+        db.setUserName(connArgs['user'])
+        db.setPassword(connArgs['password'])
+        db.setPort(int(connArgs['port']))
+        db.open()
+        databases = list()
+        if db.isOpen():
+            query = QtSql.QSqlQuery('SELECT datname FROM pg_database WHERE datistemplate = false;')
+            while query.next():
+                databases.append(query.value(0))
+            db.close()
+        return databases
+
+
     def __connect__(self):
         db = QtSql.QSqlDatabase.addDatabase("QPSQL")
         db.setHostName(self.hostName)
