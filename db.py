@@ -25,7 +25,10 @@ class PostgreSQL:
         db.setUserName(connArgs['user'])
         db.setPassword(connArgs['password'])
         db.open()
-        return db.isOpen()
+        status = db.isOpen()
+        if status:
+            db.close()
+        return status
 
     def __connect__(self):
         db = QtSql.QSqlDatabase.addDatabase("QPSQL")
