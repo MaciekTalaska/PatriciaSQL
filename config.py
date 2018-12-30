@@ -9,7 +9,6 @@ class PatriciaConfig:
 
     @staticmethod
     def save(data):
-        #props = self.createConnectionProperties()
         filename = configFileName
         outfile = open(filename, 'wb')
         pickle.dump(data, outfile)
