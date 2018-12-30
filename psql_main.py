@@ -20,11 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.actionQuit.triggered.connect(self.exitApplication)
             self.actionExecute.triggered.connect(self.executeQuery)
             self.actionSettings.triggered.connect(self.showSettings)
-            # this is temporaty and should be removed soon
             self.db = db.PostgreSQL()
-            model = self.db.getModel()
-            self.tableView.setModel(model)
-            self.tableView.show()
 
       def exitApplication(self):
 			sys.exit(0)
