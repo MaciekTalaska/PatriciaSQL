@@ -27,10 +27,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def exitApplication(self):
 		sys.exit(0)
 
-    def __connect2Database__(self, connProps):
-        if (len(connProps))>=4:
-            self.db = db.PostgreSQL(userName=connProps['user'], hostName=connProps['host'], password=connProps['password'], databaseName=connProps['db'])
-            self.lbldb.setText("connected to: " + str(connProps['db']))
+    def __connect2Database__(self, conp):
+        if (len(conp))>=4:
+            self.db = db.PostgreSQL(user=conp['user'], host=conp['host'], password=conp['password'], dbname=conp['db'])
+            self.lbldb.setText("connected to: " + str(conp['db']))
         else:
             self.db = None
             self.lbldb.setText("connected to: none")
@@ -39,8 +39,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
          dialog = DBSettingsDialog()
          retval = dialog.exec_()
          if retval == 1:
-             connProps = dialog.getData()
-             self.__connect2Database__(connProps)
+             conp = dialog.getData()
+             self.__connect2Database__(conp)
 
     def executeQuery(self):
         if self.db is not None:
