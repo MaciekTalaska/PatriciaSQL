@@ -21,15 +21,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionQuit.triggered.connect(self.exitApplication)
         self.actionExecute.triggered.connect(self.executeQuery)
         self.actionSettings.triggered.connect(self.showSettings)
-        config = PatriciaConfig.read()
-        self.__connect2Database__(config)
+        patriciaConfig = PatriciaConfig()
+        self.__connect2Database__(patriciaConfig.getConfig())
 
     def exitApplication(self):
 		sys.exit(0)
 
+    # this should be move to db.py
     def __connect2Database__(self, conp):
         if (len(conp))>=4:
-            self.db = db.PostgreSQL(user=conp['user'], host=conp['host'], password=conp['password'], dbname=conp['db'])
+            self.db = db.PostgreSQL(conp)
             self.lbldb.setText("connected to: " + str(conp['db']))
         else:
             self.db = None

@@ -4,6 +4,24 @@ configFileName = '__patricia-connection.dat'
 import os
 
 class PatriciaConfig:
+    def __init__(self):
+        self.conp = PatriciaConfig.read()
+
+    def setUser(self, user):
+        self.conp['user'] = user
+
+    def setHost(self, host):
+        self.conp['host'] = host
+
+    def setPassword(self, password):
+        self.conp['password'] = password
+
+    def setPort(self, port):
+        self.conp['port'] = port
+
+    def getConfig(self):
+        return self.conp
+
     @staticmethod
     def configExists():
         return os.path.isfile(configFileName)

@@ -2,12 +2,8 @@ from PyQt5 import QtSql
 from PyQt5 import QtCore
 
 class PostgreSQL:
-    def __init__(self, host='127.0.0.1', user='postgres', password='postgres', dbname='postgres'):
-        self.host = host
-        self.user = user
-        self.password = password
-        self.dbname = dbname
-        self.connection = self.__connect__()
+    def __init__(self, conp):
+        self.connection = PostgreSQL.connect(conp)
 
     def getModel(self, query='SELECT datname FROM pg_database WHERE datistemplate = false;'):
         model = QtSql.QSqlQueryModel()
@@ -19,25 +15,16 @@ class PostgreSQL:
             self.db.close()
 
     @staticmethod
-    def checkConnection(connArgs):
-        db = QtSql.QSqlDatabase.addDatabase("QPSQL")
-        db.setHostName(connArgs['host'])
-        db.setUserName(connArgs['user'])
-        db.setPassword(connArgs['password'])
-        db.open()
+    def checkConnection(conp):
+        db = PostgreSQL.connect(conp)
         status = db.isOpen()
         if status:
             db.close()
         return status
 
     @staticmethod
-    def getAvailableDatabases(connArgs):
-        db = QtSql.QSqlDatabase.addDatabase("QPSQL")
-        db.setHostName(connArgs['host'])
-        db.setUserName(connArgs['user'])
-        db.setPassword(connArgs['password'])
-        db.setPort(int(connArgs['port']))
-        db.open()
+    def getAvailableDatabases(conp):
+        db = PostgreSQL.connect(conp)
         databases = list()
         if db.isOpen():
             query = QtSql.QSqlQuery('SELECT datname FROM pg_database WHERE datistemplate = false;')
@@ -47,12 +34,14 @@ class PostgreSQL:
         return databases
 
 
-    def __connect__(self):
+    @staticmethod
+    def connect(conp):
         db = QtSql.QSqlDatabase.addDatabase("QPSQL")
-        db.setHostName(self.host)
-        db.setDatabaseName(self.dbname)
-        db.setUserName(self.user)
-        db.setPassword(self.password)
+        db.setHostName(conp['host'])
+        db.setUserName(conp['user'])
+        db.setPassword(conp['password'])
+        db.setDatabaseName(conp['db'])
+        db.setPort(int(conp['port']))
         db.open()
         return db
 
