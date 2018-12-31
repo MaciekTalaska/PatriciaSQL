@@ -22,18 +22,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExecute.triggered.connect(self.executeQuery)
         self.actionSettings.triggered.connect(self.showSettings)
         patriciaConfig = PatriciaConfig()
-        self.__connect2Database__(patriciaConfig.getConfig())
+        config = patriciaConfig.getConfig()
+        self.updateDBConnection(config)
 
     def exitApplication(self):
 		sys.exit(0)
 
-    # this should be move to db.py
-    def __connect2Database__(self, conp):
-        if (len(conp))>=4:
-            self.db = db.PostgreSQL(conp)
-            self.lbldb.setText("connected to: " + str(conp['db']))
+    def updateDBConnection(self, conp):
+        self.db = db.PostgreSQL(conp)
+        if self.db is not None:
+            self.lbldb.setText("connected to: " + conp['db'])
         else:
-            self.db = None
             self.lbldb.setText("connected to: none")
 
     def showSettings(self):
@@ -41,7 +40,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
          retval = dialog.exec_()
          if retval == 1:
              conp = dialog.getData()
-             self.__connect2Database__(conp)
+             self.updateDBConnection(conp)
 
     def executeQuery(self):
         if self.db is not None:

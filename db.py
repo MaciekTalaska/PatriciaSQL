@@ -37,11 +37,14 @@ class PostgreSQL:
     @staticmethod
     def connect(conp):
         db = QtSql.QSqlDatabase.addDatabase("QPSQL")
-        db.setHostName(conp['host'])
-        db.setUserName(conp['user'])
-        db.setPassword(conp['password'])
-        db.setDatabaseName(conp['db'])
-        db.setPort(int(conp['port']))
-        db.open()
+        if (len(conp)>=4):
+            db.setHostName(conp['host'])
+            db.setUserName(conp['user'])
+            db.setPassword(conp['password'])
+            db.setDatabaseName(conp['db'])
+            db.setPort(int(conp['port']))
+            db.open()
+        else:
+            db = None
         return db
 
