@@ -11,14 +11,14 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         self.setupUi(self)
         self.btnResetPort.clicked.connect(self.resetPort)
         self.btnTestConnection.clicked.connect(self.testConnection)
-        self.btnBrowseDatabases.clicked.connect(self.getAllDBs)
+        self.btnBrowseDatabases.clicked.connect(self.populateAvailableDBs)
 
     def resetPort(self):
         self.txtPort.setText('5432')
 
-    def getAllDBs(self):
+    def populateAvailableDBs(self):
         connProps = self.createConnectionProperties()
-        dbs = PostgreSQL.getAvailableDatabases(connProps)
+        dbs = PostgreSQL.retrieveAvailableDatabases(connProps)
         for i in range(len(dbs)):
             self.cbxDBs.addItem(str(dbs[i]))
 

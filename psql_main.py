@@ -20,7 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionSettings.triggered.connect(self.showSettings)
         # read config & use last saved connection
         patriciaConfig = PatriciaConfig()
-        config = patriciaConfig.getConfig()
+        config = patriciaConfig.connectionConfig
         self.updateDBConnection(config)
 
     def exitApplication(self):

@@ -23,7 +23,7 @@ class PostgreSQL:
         return status
 
     @staticmethod
-    def getAvailableDatabases(conp):
+    def retrieveAvailableDatabases(conp):
         db = PostgreSQL.connect(conp)
         databases = list()
         if db.isOpen():

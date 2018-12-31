@@ -7,19 +7,33 @@ class PatriciaConfig:
     def __init__(self):
         self.conp = PatriciaConfig.read()
 
-    def setUser(self, user):
-        self.conp['user'] = user
+    @property
+    def user(self):
+        return self.conp['user']
 
-    def setHost(self, host):
-        self.conp['host'] = host
+    @property
+    def host(self):
+        return self.conp['host']
 
-    def setPassword(self, password):
-        self.conp['password'] = password
+    @property
+    def password(self):
+        return self.conp['password']
 
-    def setPort(self, port):
-        self.conp['port'] = port
+    @property
+    def port(self):
+        p = self.conp['port']
+        n = int(p)
+        if p is not None and n is not None:
+            return n
+        else:
+            raise "no port defined!"
 
-    def getConfig(self):
+    @property
+    def dbname(self):
+        return self.conp['db']
+
+    @property
+    def connectionConfig(self):
         return self.conp
 
     @staticmethod
