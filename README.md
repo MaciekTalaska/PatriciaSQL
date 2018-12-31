@@ -8,24 +8,29 @@ I am using Debian/Ubuntu compatible operating system + KDE Plasma as my desktop 
 Requirements:
 ---------------
 
-- Python
+- Python (either 2.7x or 3.x)
 - PostgreSQL (it was tested with PosgreSQL 10 & 11)
 - libqt5sql5-psql 
 
 Development:
 --------------
 
-Apart from what is listed above, some additional libraries & tools may be needed to work (develop) this app.
+Apart from what is listed above, some additional libraries & tools may be needed, in case you want to to work on this app.
 
 1. Qt Designer (for forms design) `sudo apt install qt-creator`
 2. PyQt5 dev tools: `sudo apt install pyqt5-dev-tools`
 3. You may also need one of the following:
-  * python3-pyqt5 (for Python 3.x)
-  * python-pyqt5 (for Python 2.x)
-  * python-pyqt5.qtsql
-  * python-pyside2.qtsql
+   For Python3:
+  * python3-pyqt5
   * python3-pyqt5.qtsql
+   For Python 2.7.x:
+  * python-pyqt5
+  * python-pyqt5.qtsql
 
+In case something doesn't work, try installing:
+  * python-pyside2.qtsql
+  or
+  * python3-pyside2.qtsql
 
 Todo:
 ------
