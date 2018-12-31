@@ -56,7 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lblstatus.setText("rows: " + str(model.rowCount()))
 
 if __name__ == "__main__":
-    app = QApplication([])
+    app = QApplication(sys.argv)
     app.setApplicationName("PatriciaSQL")
     window = MainWindow()
     app.exec_()
