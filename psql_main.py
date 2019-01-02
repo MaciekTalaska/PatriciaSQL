@@ -22,7 +22,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionSettings.triggered.connect(self.showSettings)
         # read config
         self.psqlConfig = PatriciaConfig()
-        #config = psqlConfig.connectionConfig
         self.psqlConfig.read()
         # try to connect (most recent connection)
         self.pgsql = db.PostgreSQL()

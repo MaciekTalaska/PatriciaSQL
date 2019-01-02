@@ -77,16 +77,6 @@ class PatriciaConfig:
     def configExists():
         return os.path.isfile(configFileName)
 
-#    @staticmethod
-#    def __read__():
-#        data = dict()
-#        exists = PatriciaConfig.configExists()
-#        if exists:
-#            infile = open(configFileName, 'rb')
-#            data = pickle.load(infile)
-#            infile.close()
-#        return data
-
     @staticmethod
     def save(data):
         filename = configFileName

@@ -30,11 +30,6 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         cp.user = self.txtUserName.text()
         cp.password = self.txtPassword.text()
         cp.db = self.cbxDBs.currentText()
-#        cp['host'] = self.txtHostName.text()
-#        cp['port'] = self.txtPort.text()
-#        cp['user'] = self.txtUserName.text()
-#        cp['password'] = self.txtPassword.text()
-#        cp['db'] = self.cbxDBs.currentText()
         return cp
 
     def __testConnection__(self):
