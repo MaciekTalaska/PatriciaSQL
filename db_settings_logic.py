@@ -22,10 +22,6 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         dbs = self.pgsql.retrieveAvailableDatabases(conp)
         for i in range(len(dbs)):
             self.cbxDBs.addItem(str(dbs[i]))
-#        connProps = self.__createConnectionProperties__()
-#        dbs = PostgreSQL.retrieveAvailableDatabases(connProps)
-#        for i in range(len(dbs)):
-#            self.cbxDBs.addItem(str(dbs[i]))
 
     def __createConnectionProperties__(self):
         cp = dict()
@@ -34,7 +30,6 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         cp['user'] = self.txtUserName.text()
         cp['password'] = self.txtPassword.text()
         cp['db'] = self.cbxDBs.currentText()
-        #cp['db'] = self.cbxDBs.text()
         return cp
 
     def __testConnection__(self):
@@ -47,21 +42,12 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             msg.setText("Error!")
             msg.exec_()
 
-
-#        connProps = self.__createConnectionProperties__()
-#        msg = QtWidgets.QMessageBox()
-#        if PostgreSQL.checkConnection(connProps):
-#            msg.setText("Success!")
-#            msg.exec_()
-#        else:
-#            msg.setText("Error!")
-#            msg.exec_()
-
     def getConnectionProperties(self):
         props = self.__createConnectionProperties__()
         PatriciaConfig.save(props)
         return self.__createConnectionProperties__()
 
+    # TODO
     # Ideally this should be used to display Dialog and get connection properties from it
     # It may be a good idea to pass old (current) connection as parameter, so in case 'Cancel' is clicked, it is returned
     # OR
