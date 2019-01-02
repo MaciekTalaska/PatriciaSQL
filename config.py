@@ -5,19 +5,32 @@ import os
 
 class PatriciaConfig:
     def __init__(self):
-        self.conp = PatriciaConfig.read()
+        self.conp = dict()
+        #self.conp = PatriciaConfig.read()
 
     @property
     def user(self):
         return self.conp['user']
 
+    @user.setter
+    def user(self, val):
+        self.conp['user'] = val
+
     @property
     def host(self):
         return self.conp['host']
 
+    @host.setter
+    def host(self, val):
+        self.conp['host'] = val
+
     @property
     def password(self):
         return self.conp['password']
+
+    @password.setter
+    def password(self, val):
+        self.conp['password'] = val
 
     @property
     def port(self):
@@ -28,27 +41,51 @@ class PatriciaConfig:
         else:
             raise "no port defined!"
 
+    @port.setter
+    def port(self, val):
+        self.conp['port'] = val
+
     @property
-    def dbname(self):
+    def db(self):
         return self.conp['db']
+
+    @db.setter
+    def db(self, val):
+        self.conp['db'] = val
 
     @property
     def connectionConfig(self):
         return self.conp
 
-    @staticmethod
-    def configExists():
-        return os.path.isfile(configFileName)
+    def readDefaultConfig(self):
+        self.conp = PatriciaConfig.read()
 
-    @staticmethod
-    def read():
-        data = dict()
+    def read(self):
         exists = PatriciaConfig.configExists()
+        data = dict()
         if exists:
             infile = open(configFileName, 'rb')
             data = pickle.load(infile)
             infile.close()
-        return data
+        self.conp = data
+
+    def isConnectionDataValid(self):
+        return self.conp is not None and self.host and self.user and self.port and self.db and self.password
+
+    # static methods
+    @staticmethod
+    def configExists():
+        return os.path.isfile(configFileName)
+
+#    @staticmethod
+#    def __read__():
+#        data = dict()
+#        exists = PatriciaConfig.configExists()
+#        if exists:
+#            infile = open(configFileName, 'rb')
+#            data = pickle.load(infile)
+#            infile.close()
+#        return data
 
     @staticmethod
     def save(data):

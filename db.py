@@ -6,19 +6,20 @@ class PostgreSQL:
         self.connection = None
         self.connection = QtSql.QSqlDatabase.addDatabase("QPSQL")
 
-    def __isProperConnectionProperties__(self, props):
-        if ('host' in props and
-           'user' in props and
-           'password' in props and
-           'db' in props):
-            return True
-        else:
-            return False
+#    def __isConnectionDictValid__(self, props):
+#        if ('host' in props and
+#           'user' in props and
+#           'password' in props and
+#           'db' in props):
+#            return True
+#        else:
+#            return False
 
     def reconnect(self, conp):
-        if ((self.connection is not None) and
-                (self.connection.isOpen()) and
-                self.__isProperConnectionProperties__(conp)):
+        if (self.connection is not None and
+                self.connection.isOpen() and
+                conp.isConnectionDataValid()):
+#                self.__isConnectionDictValid__(conp)):
             self.connection.close()
         self.connect(conp)
 
@@ -36,10 +37,14 @@ class PostgreSQL:
 
     def checkConnection(self, conp):
         clone = QtSql.QSqlDatabase.cloneDatabase(self.connection, "connectivityTest")
-        clone.setUserName(conp['user'])
-        clone.setHostName(conp['host'])
-        clone.setPort(int(conp['port']))
-        clone.setPassword(conp['password'])
+        clone.setUserName(conp.user)
+        clone.setHostName(conp.host)
+        clone.setPort(conp.port)
+        clone.setPassword(conp.password)
+#        clone.setUserName(conp['user'])
+#        clone.setHostName(conp['host'])
+#        clone.setPort(int(conp['port']))
+#        clone.setPassword(conp['password'])
         clone.open()
         status = clone.isOpen()
         if status:
@@ -58,12 +63,19 @@ class PostgreSQL:
         return databases
 
     def connect(self, conp):
-        if (len(conp)>=4):
-            self.connection.setHostName(conp['host'])
-            self.connection.setUserName(conp['user'])
-            self.connection.setPassword(conp['password'])
-            self.connection.setPort(int(conp['port']))
-            if 'db' in conp:
-                self.connection.setDatabaseName(conp['db'])
+#        if (len(conp)>=4):
+        if (conp.isConnectionDataValid()):
+            self.connection.setHostName(conp.host)
+            self.connection.setUserName(conp.user)
+            self.connection.setPassword(conp.password)
+            self.connection.setPort(conp.port)
+            self.connection.setDatabaseName(conp.db)
             self.connection.open()
+#            self.connection.setHostName(conp['host'])
+#            self.connection.setUserName(conp['user'])
+#            self.connection.setPassword(conp['password'])
+#            self.connection.setPort(int(conp['port']))
+#            if 'db' in conp:
+#                self.connection.setDatabaseName(conp['db'])
+#            self.connection.open()
 

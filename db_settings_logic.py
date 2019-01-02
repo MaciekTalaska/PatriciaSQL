@@ -24,12 +24,17 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             self.cbxDBs.addItem(str(dbs[i]))
 
     def __createConnectionProperties__(self):
-        cp = dict()
-        cp['host'] = self.txtHostName.text()
-        cp['port'] = self.txtPort.text()
-        cp['user'] = self.txtUserName.text()
-        cp['password'] = self.txtPassword.text()
-        cp['db'] = self.cbxDBs.currentText()
+        cp = PatriciaConfig()
+        cp.host = self.txtHostName.text()
+        cp.port = int(self.txtPort.text())
+        cp.user = self.txtUserName.text()
+        cp.password = self.txtPassword.text()
+        cp.db = self.cbxDBs.currentText()
+#        cp['host'] = self.txtHostName.text()
+#        cp['port'] = self.txtPort.text()
+#        cp['user'] = self.txtUserName.text()
+#        cp['password'] = self.txtPassword.text()
+#        cp['db'] = self.cbxDBs.currentText()
         return cp
 
     def __testConnection__(self):

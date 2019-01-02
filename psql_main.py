@@ -21,11 +21,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExecute.triggered.connect(self.executeQuery)
         self.actionSettings.triggered.connect(self.showSettings)
         # read config
-        patriciaConfig = PatriciaConfig()
-        config = patriciaConfig.connectionConfig
+        self.psqlConfig = PatriciaConfig()
+        #config = psqlConfig.connectionConfig
+        self.psqlConfig.read()
         # try to connect (most recent connection)
         self.pgsql = db.PostgreSQL()
-        self.updateDBConnection(config)
+        self.updateDBConnection(self.psqlConfig)
 
     def exitApplication(self):
         sys.exit(0)
