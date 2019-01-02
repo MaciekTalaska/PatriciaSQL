@@ -34,7 +34,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pgsql.reconnect(conp)
         # TODO change it, so dbname is retrieved from pgsql
         self.lbldb.setText("connected to: " + str(conp.get('db')))
-        #self.lbldb.setText("connected to: " + self.pgsql.getCurrentDBName())
 
     def showSettings(self):
         dialog = DBSettingsDialog(self.pgsql)
@@ -57,20 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lblstatus.setText("rows: " + str(model.rowCount()))
 
 
-def trace_calls(frame, event, arg):
-    print('--------')
-    print('frame: ' + str(frame))
-    print('  func name: ' + frame.f_code.co_name)
-    print('  line: ' + str(frame.f_lineno))
-    print('  filename: ' + frame.f_code.co_filename)
-    print('event: ' + event)
-    print('arg:   ' + str(arg))
-    print('--------')
-    if event != 'exception':
-        return
-
 if __name__ == "__main__":
-    #sys.settrace(trace_calls)
     app = QApplication(sys.argv)
     app.setApplicationName("PatriciaSQL")
     window = MainWindow()
