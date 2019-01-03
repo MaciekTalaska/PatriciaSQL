@@ -42,6 +42,11 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             msg.setText("Error!")
             msg.exec_()
 
+    def getConnectionPropertiesInternal(self):
+        props = self.__createConnectionProperties__()
+        PatriciaConfig.save(props)
+        return self.__createConnectionProperties__()
+
     @staticmethod
     def getConnectionProperties(pgsql):
         dialog = DBSettingsDialog(pgsql)

@@ -9,7 +9,7 @@ class PatriciaConfig:
 
     @property
     def user(self):
-        return self.conp['user']
+        return self.conp.get('user')
 
     @user.setter
     def user(self, val):
@@ -17,7 +17,7 @@ class PatriciaConfig:
 
     @property
     def host(self):
-        return self.conp['host']
+        return self.conp.get('host')
 
     @host.setter
     def host(self, val):
@@ -25,7 +25,7 @@ class PatriciaConfig:
 
     @property
     def password(self):
-        return self.conp['password']
+        return self.conp.get('password')
 
     @password.setter
     def password(self, val):
@@ -33,16 +33,12 @@ class PatriciaConfig:
 
     @property
     def port(self):
-        p = self.conp['port']
-        n = int(p)
-        if p is not None and n is not None:
-            return n
-        else:
-            raise Exception("no port defined!")
+        return self.conp.get('port')
 
     @port.setter
     def port(self, val):
-        self.conp['port'] = val
+        if val is not None and str(val).isdigit():
+            self.conp['port'] = int(val)
 
     @property
     def db(self):
@@ -66,11 +62,17 @@ class PatriciaConfig:
             infile = open(configFileName, 'rb')
             data = pickle.load(infile)
             infile.close()
-        self.conp = data.conp
+            self.conp = data.conp
 
     def isConnectionDataValid(self):
-        validity = (self.conp is not None) and self.host and self.user and self.port and self.db and self.password
-        return validity
+        return ((self.conp is not None)
+                          and self.host
+                          and self.user
+                          and self.port
+                          and self.password)
+
+    def isConnectionDataAndDBValid(self):
+       return self.isConnectionDataValid() and self.db
 
     # static methods
     @staticmethod

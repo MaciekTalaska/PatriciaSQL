@@ -8,7 +8,7 @@ class PostgreSQL:
     def reconnect(self, conp):
         if (self.connection is not None and
                 self.connection.isOpen() and
-                conp.isConnectionDataValid()):
+                conp.isConnectionDataAndDBValid()):
             self.connection.close()
         self.connect(conp)
 
