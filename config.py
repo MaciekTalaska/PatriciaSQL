@@ -42,7 +42,7 @@ class PatriciaConfig:
 
     @property
     def db(self):
-        return self.conp['db']
+        return self.conp.get('db')
 
     @db.setter
     def db(self, val):

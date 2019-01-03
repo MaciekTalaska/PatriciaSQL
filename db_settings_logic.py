@@ -8,6 +8,7 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         QtWidgets.QDialog.__init__(self)
         ui_dialog.__init__(self)
         self.setupUi(self)
+        self.pgsql = pgsql
         self.btnResetPort.clicked.connect(self.resetPort)
         self.btnTestConnection.clicked.connect(self.__testConnection__)
         self.btnBrowseDatabases.clicked.connect(self.__populateAvailableDBs__)
@@ -19,21 +20,17 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             self.txtPassword.setText(config.password)
             if config.port is not None:
                self.txtPort.setText(str(config.port))
-        self.pgsql = pgsql
+            if config.db and self.pgsql.isConnectionOpen():
+                self.setUsedDatabase(config.db)
         # update connection info when a field has been changed
         self.txtUserName.editingFinished.connect(self.showConnectionState)
         self.txtPassword.editingFinished.connect(self.showConnectionState)
         self.txtHostName.editingFinished.connect(self.showConnectionState)
         self.txtPort.editingFinished.connect(self.showConnectionState)
 
-    # TODO:
-    def setUsedDatabase(self):
-        #1 get all available databases
-        #2 populate combobox
-        #3 set combobox to the value from config - if possible
-        #4 if not possible? - what to do?
-        pass
-
+    def setUsedDatabase(self, dbname):
+        self.__populateAvailableDBs__()
+        self.cbxDBs.setCurrentText(dbname)
 
     def resetPort(self):
         self.txtPort.setText('5432')
@@ -87,6 +84,7 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
     def getConnectionProperties(pgsql, config):
         dialog = DBSettingsDialog(pgsql, config)
         retval = dialog.exec_()
+        newConfig = None
         if retval == 1:
             newConfig = dialog.getConnectionPropertiesInternal()
         return retval, newConfig
