@@ -1,7 +1,6 @@
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5 import QtWidgets, uic
 
 ui_dialog, _ = uic.loadUiType("db_settings.ui")
-from db import PostgreSQL
 from config import PatriciaConfig
 
 class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
