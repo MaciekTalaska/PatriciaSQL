@@ -5,14 +5,31 @@ from db import PostgreSQL
 from config import PatriciaConfig
 
 class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
-    def __init__(self, pgsql):
+    def __init__(self, pgsql, config):
         QtWidgets.QDialog.__init__(self)
         ui_dialog.__init__(self)
         self.setupUi(self)
         self.btnResetPort.clicked.connect(self.resetPort)
         self.btnTestConnection.clicked.connect(self.__testConnection__)
         self.btnBrowseDatabases.clicked.connect(self.__populateAvailableDBs__)
+        # populate controls with saved data (if config has it)
+        if config is not None:
+            if config.host is not None:
+                self.txtHostName.setText(config.host)
+            self.txtUserName.setText(config.user)
+            self.txtPassword.setText(config.password)
+            if config.port is not None:
+               self.txtPort.setText(str(config.port))
         self.pgsql = pgsql
+
+    # TODO:
+    def setUsedDatabase(self):
+        #1 get all available databases
+        #2 populate combobox
+        #3 set combobox to the value from config - if possible
+        #4 if not possible? - what to do?
+        pass
+
 
     def resetPort(self):
         self.txtPort.setText('5432')
@@ -48,8 +65,8 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         return self.__createConnectionProperties__()
 
     @staticmethod
-    def getConnectionProperties(pgsql):
-        dialog = DBSettingsDialog(pgsql)
+    def getConnectionProperties(pgsql, config):
+        dialog = DBSettingsDialog(pgsql, config)
         retval = dialog.exec_()
         if retval == 1:
             newConfig = dialog.getConnectionPropertiesInternal()

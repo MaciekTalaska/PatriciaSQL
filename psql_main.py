@@ -35,7 +35,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbldb.setText("connected to: " + self.pgsql.getCurrentDBName())
 
     def showSettings(self):
-        retval, newConfig = DBSettingsDialog.getConnectionProperties(self.pgsql)
+        retval, newConfig = DBSettingsDialog.getConnectionProperties(self.pgsql, self.psqlConfig)
         if retval == 1:
             self.psqlConfig = newConfig
             self.updateDBConnection(newConfig)
