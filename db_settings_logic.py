@@ -20,6 +20,11 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             if config.port is not None:
                self.txtPort.setText(str(config.port))
         self.pgsql = pgsql
+        # update connection info when a field has been changed
+        self.txtUserName.editingFinished.connect(self.showConnectionState)
+        self.txtPassword.editingFinished.connect(self.showConnectionState)
+        self.txtHostName.editingFinished.connect(self.showConnectionState)
+        self.txtPort.editingFinished.connect(self.showConnectionState)
 
     # TODO:
     def setUsedDatabase(self):
@@ -66,6 +71,17 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         props = self.__createConnectionProperties__()
         PatriciaConfig.save(props)
         return self.__createConnectionProperties__()
+
+    def showConnectionState(self):
+        connectionProperties = self.__createConnectionProperties__()
+        if self.pgsql.checkConnection(connectionProperties):
+            self.lblConnectionState.setText("success!")
+            self.lblConnectionState.setStyleSheet("color:rgb(85, 170, 127)")
+            if self.cbxDBs.count() < 1:
+                self.__populateAvailableDBs__()
+        else:
+            self.lblConnectionState.setText("error connecting...")
+            self.lblConnectionState.setStyleSheet("color:rgb(170, 0, 0)")
 
     @staticmethod
     def getConnectionProperties(pgsql, config):
