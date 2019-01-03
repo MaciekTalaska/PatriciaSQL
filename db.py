@@ -24,6 +24,9 @@ class PostgreSQL:
         else:
             return 'none'
 
+    def isConnectionOpen(self):
+        return self.connection.isOpen()
+
     def checkConnection(self, conp):
         clone = QtSql.QSqlDatabase.cloneDatabase(self.connection, "connectivityTest")
         clone.setUserName(conp.user)

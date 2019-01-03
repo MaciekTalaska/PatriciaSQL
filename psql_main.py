@@ -32,7 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def updateDBConnection(self, conp):
         self.pgsql.reconnect(conp)
-        self.lbldb.setText("connected to: " +str(self.pgsql.getCurrentDBName()))
+        self.lbldb.setText("connected to: " + self.pgsql.getCurrentDBName())
 
     def showSettings(self):
         retval, newConfig = DBSettingsDialog.getConnectionProperties(self.pgsql)
@@ -42,16 +42,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def executeQuery(self):
         queryText = self.sqlEditorArea.toPlainText()
-        model = self.pgsql.getModel(queryText)
-        if self.pgsql is not None:
+        if self.pgsql is not None and self.pgsql.isConnectionOpen():
+            model = self.pgsql.getModel(queryText)
             self.tableView.setModel(model)
             self.tableView.show()
             self.lblstatus.setText("rows: " + str(model.rowCount()))
         else:
             msg = QMessageBox()
-            msg.setText("Not connected to DB!")
+            msg.setText("Not connected to PostgreSQL!")
+            msg.setWindowTitle("Error executing query!")
+            msg.setIcon(QMessageBox.Critical)
             msg.exec_()
-            self.lblstatus.setText("rows: " + str(model.rowCount()))
+            self.lblstatus.setText("rows: 0")
 
 
 if __name__ == "__main__":
