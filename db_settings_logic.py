@@ -52,10 +52,14 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         connProps = self.__createConnectionProperties__()
         msg = QtWidgets.QMessageBox()
         if self.pgsql.checkConnection(connProps):
-            msg.setText("Success!")
+            msg.setWindowTitle("Success!")
+            msg.setText("Connection to database established succesfully")
+            msg.setIcon(QtWidgets.QMessageBox.Information)
             msg.exec_()
         else:
-            msg.setText("Error!")
+            msg.setWindowTitle("Erorr!")
+            msg.setText("Unable to connect to PostgreSQL server!")
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.exec_()
 
     def getConnectionPropertiesInternal(self):
