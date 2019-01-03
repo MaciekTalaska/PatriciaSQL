@@ -39,11 +39,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if retval == 1:
             self.psqlConfig = newConfig
             self.updateDBConnection(newConfig)
-#        dialog = DBSettingsDialog(self.pgsql)
-#        retval = dialog.exec_()
-#        if retval == 1:
-#            conp = dialog.getConnectionProperties()
-#            self.updateDBConnection(conp)
 
     def executeQuery(self):
         queryText = self.sqlEditorArea.toPlainText()
