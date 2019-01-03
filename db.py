@@ -1,5 +1,5 @@
 from PyQt5 import QtSql
-from PyQt5 import QtCore
+
 
 class PostgreSQL:
     def __init__(self):
