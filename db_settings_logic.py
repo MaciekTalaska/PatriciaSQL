@@ -42,18 +42,20 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             msg.setText("Error!")
             msg.exec_()
 
-    def getConnectionProperties(self):
-        props = self.__createConnectionProperties__()
-        PatriciaConfig.save(props)
-        return self.__createConnectionProperties__()
+#    def getConnectionPropertiesInternal(self):
+#        props = self.__createConnectionProperties__()
+#        PatriciaConfig.save(props)
+#        return self.__createConnectionProperties__()
 
     # TODO
     # Ideally this should be used to display Dialog and get connection properties from it
     # It may be a good idea to pass old (current) connection as parameter, so in case 'Cancel' is clicked, it is returned
     # OR
     # return false (cancel) or true, depending on what button hsa been clicked, so that parent window does not reconnect to db if it is not needed
-#    @staticmethod
-#    def getConnectionProperties():
-#        dialog = DBSettingsDialog()
-#        retval = dialog.exec_()
-#        return dialog.getConnectionProperties()
+    @staticmethod
+    def getConnectionProperties(pgsql):
+        dialog = DBSettingsDialog(pgsql)
+        retval = dialog.exec_()
+        if retval == 1:
+            newConfig = dialog.getConnectionPropertiesInternal()
+        return retval, newConfig

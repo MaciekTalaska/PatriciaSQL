@@ -6,7 +6,6 @@ import os
 class PatriciaConfig:
     def __init__(self):
         self.conp = dict()
-        #self.conp = PatriciaConfig.read()
 
     @property
     def user(self):
@@ -39,7 +38,7 @@ class PatriciaConfig:
         if p is not None and n is not None:
             return n
         else:
-            raise "no port defined!"
+            raise Exception("no port defined!")
 
     @port.setter
     def port(self, val):
@@ -67,10 +66,11 @@ class PatriciaConfig:
             infile = open(configFileName, 'rb')
             data = pickle.load(infile)
             infile.close()
-        self.conp = data
+        self.conp = data.conp
 
     def isConnectionDataValid(self):
-        return self.conp is not None and self.host and self.user and self.port and self.db and self.password
+        validity = (self.conp is not None) and self.host and self.user and self.port and self.db and self.password
+        return validity
 
     # static methods
     @staticmethod

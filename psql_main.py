@@ -35,16 +35,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbldb.setText("connected to: " +str(self.pgsql.getCurrentDBName()))
 
     def showSettings(self):
-        dialog = DBSettingsDialog(self.pgsql)
-        retval = dialog.exec_()
+        retval, newConfig = DBSettingsDialog.getConnectionProperties(self.pgsql)
         if retval == 1:
-            conp = dialog.getConnectionProperties()
-            self.updateDBConnection(conp)
+            self.psqlConfig = newConfig
+            self.updateDBConnection(newConfig)
+#        dialog = DBSettingsDialog(self.pgsql)
+#        retval = dialog.exec_()
+#        if retval == 1:
+#            conp = dialog.getConnectionProperties()
+#            self.updateDBConnection(conp)
 
     def executeQuery(self):
+        queryText = self.sqlEditorArea.toPlainText()
+        model = self.pgsql.getModel(queryText)
         if self.pgsql is not None:
-            queryText = self.sqlEditorArea.toPlainText()
-            model = self.pgsql.getModel(queryText)
             self.tableView.setModel(model)
             self.tableView.show()
             self.lblstatus.setText("rows: " + str(model.rowCount()))
