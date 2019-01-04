@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import *
 Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
 from db_settings_logic import DBSettingsDialog
 from config import PatriciaConfig
+import syntax
 
 import sys
 import db
@@ -13,6 +14,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
+        self.highlight = syntax.PgSQLHighlighter(self.sqlEditorArea.document())
         self.show()
         # wire up signals & slots
         self.actionQuit.triggered.connect(self.exitApplication)
