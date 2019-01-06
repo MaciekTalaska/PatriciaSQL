@@ -5,6 +5,15 @@ This is very simple PostgreSQL client written in PyQt (Qt GUI and Python).
 
 I am using Debian/Ubuntu compatible operating system + KDE Plasma as my desktop environment. I haven't tested this tool neither on other Linux distros, nor on other operating systems (OXS, Windows etc). This should work without any problems (as both Qt and Python are widely available) but some additional dependencies may be required (especially for database connectivity, or development of the app on other OS).
 
+
+Screenshots:
+------------
+
+![PatriciaSQL Main Window](PatriciaSQL-main.png)
+
+![PatriciaSQL - connection settings](PatriciaSQL-connection_settings.png)
+
+
 Requirements:
 ---------------
 
