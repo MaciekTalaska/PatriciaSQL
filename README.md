@@ -43,12 +43,12 @@ In case something doesn't work, try installing:
 
 Todo:
 ------
-This section should rather be entitled "would like to have", as I am not sure I will have enough time to work on all of these:
+This section should rather be entitled "what would I like to have", as I am not sure I will have enough time to work on all of these:
 
  - [ ] .deb package
  - [x] syntax highlighting for PgSQL statements
  - [ ] store connection information in human readable format (now it is saved using pickle)
- - [ ] auto-complete (database names, columns...):
+ - [ ] auto-complete:
     - [ ] keywords autocomplete
     - [ ] words used autocomplete
     - [ ] database names, table names, column names... (*)
@@ -58,8 +58,9 @@ This section should rather be entitled "would like to have", as I am not sure I 
  - [ ] general UI improvements:
    - [ ] additional info on query execution (execution time)
    - [ ] displaying db errors on query execution
+   - [ ] solarized-light theme for the editor
    
-* - I am afraid that this is going to be pretty tricky one
+(*) I am afraid that this is going to be pretty tricky one
 
 Disclaimer:
 --------------
