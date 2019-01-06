@@ -38,6 +38,7 @@ This section should rather be entitled "would like to have", as I am not sure I 
 
  - [ ] .deb package
  - [x] syntax highlighting for PgSQL statements
+ - [ ] store connection information in human readable format (now it is saved using pickle)
  - [ ] auto-complete (database names, columns...):
     - [ ] keywords autocomplete
     - [ ] words used autocomplete
