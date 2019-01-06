@@ -51,4 +51,4 @@ This section should rather be entitled "would like to have", as I am not sure I 
 
 Disclaimer:
 --------------
-It was more of an experiment. There are couple of things I would like to improve, but working on it is pretty low in my priority list (read: there is a little chance that this tool will be maintained or developed further by me).
+It was more of an experiment. I have no plans at the moment to make it a "full blown" tool. It should stay simple (and hopefully - fast). There are couple of things I would like to improve (listed in TODO section), but working on it is not very high on my priority list (read: it may happen any moment that I stop working on it).
