@@ -40,6 +40,9 @@ This section should rather be entitled "would like to have", as I am not sure I 
  - [ ] syntax highlighting for PgSQL statements
  - [ ] auto-complete (database names, columns...) (*)
  - [ ] storing many connection information
+ - [ ] execute only highlighted text (execute one of many queries)
+ - [ ] shortcut for 'execute as explain'
+ - [ ] show query execution time
  - [ ] general UI improvements:
    - [ ] additional info on query execution (execution time)
    - [ ] displaying db errors on query execution
