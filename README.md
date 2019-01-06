@@ -34,20 +34,22 @@ In case something doesn't work, try installing:
 
 Todo:
 ------
-This section should rather be entitled "would like to have", as I am not sure I will have enough time to work on these
+This section should rather be entitled "would like to have", as I am not sure I will have enough time to work on all of these:
 
  - [ ] .deb package
- - [ ] syntax highlighting for PgSQL statements
- - [ ] auto-complete (database names, columns...) (*)
+ - [x] syntax highlighting for PgSQL statements
+ - [ ] auto-complete (database names, columns...):
+    - [ ] keywords autocomplete
+    - [ ] words used autocomplete
+    - [ ] database names, table names, column names... (*)
  - [ ] storing many connection information
  - [ ] execute only highlighted text (execute one of many queries)
  - [ ] shortcut for 'execute as explain'
- - [ ] show query execution time
  - [ ] general UI improvements:
    - [ ] additional info on query execution (execution time)
    - [ ] displaying db errors on query execution
    
-   * - I am afraid that this is going to be pretty tricky one
+* - I am afraid that this is going to be pretty tricky one
 
 Disclaimer:
 --------------
