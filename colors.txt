@@ -1,0 +1,48 @@
+[
+    {
+        'name': 'keywords',
+        'color': '0x0087ff',
+        'words': ['all', 'analyse', 'analyze', 'array', 'as', 'asc', 'authorization', 'both', 'case', 'cast',
+                  'check', 'collate', 'column', 'concurrently', 'constraint', 'create', 'current_catalog',
+                  'current_date', 'current_role', 'current_schema', 'current_time', 'current_timestamp',
+                  'current_user', 'defaults', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end', 'except',
+                  'false', 'fetch', 'for', 'foreign', 'from', 'full', 'grant', 'group by', 'having', 'ilike',
+                  'initially', 'intersect', 'into', 'lateral', 'limit', 'localtime', 'localtimestamp', 'null',
+                  'offset', 'on', 'only', 'order by', 'placing', 'primary', 'references', 'returning', 'select',
+                  'session_user', 'similar', 'some', 'symmetric', 'table', 'then', 'trailing', 'true', 'union',
+                  'unique', 'user', 'variadic', 'version', 'when', 'where', 'window', 'with'],
+        'regex': '',
+    },
+    {
+        'name': 'operators',
+        'color': '0xdc322f',
+        'words': ['\+', '-', '\*', '/', '\%', '\&', '\|', '\^', '=', '>', '<', '>=', '<=', '<>', '\+=', '-=', '\*=',
+                  '/=', '\%=', '\%=', '\^-=', '\|*=', ' all ', ' and ', ' any ', ' between ', ' exists ', ' in ',
+                  ' like ', ' not ', ' or ', ' some ', ],
+        'regex': ''
+    },
+    {
+        'name': 'strings',
+        'color': '0xd33682',
+        'words': [],
+        'regex': r'"[^"\\]*(\\.[^"\\]*)*"'
+    },
+    {
+        'name': 'strings',
+        'color': '0xd33682',
+        'words': [],
+        'regex': r'"[^"\\]*(\\.[^"\\]*)*"'
+    },
+    {
+        'name': 'numbers',
+        'color': '0x268bd',
+        'words': [],
+        'regex': r'[+-]?\b\d+\b'
+    },
+    {
+        'name': 'comments',
+        'color': '0x839496',
+        'words': [],
+        'regex': r'--.*$'
+    },
+]
