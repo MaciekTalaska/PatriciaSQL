@@ -15,6 +15,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
         self.highlight = syntax.PgSQLHighlighter(self.sqlEditorArea.document())
+        self.move(QDesktopWidget().availableGeometry().center() - self.frameGeometry().center())
         self.show()
         # wire up signals & slots
         self.actionQuit.triggered.connect(self.exitApplication)
