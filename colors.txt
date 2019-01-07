@@ -31,7 +31,7 @@
         'name': 'strings',
         'color': '0xd33682',
         'words': [],
-        'regex': r'"[^"\\]*(\\.[^"\\]*)*"'
+        'regex': r"'[^'\\]*(\\.[^'\\]*)*'"
     },
     {
         'name': 'numbers',
