@@ -24,10 +24,9 @@ class PgSQLHighlighter(QSyntaxHighlighter):
             text_formatting.setForeground(color)
             # group name
             group_name = g.get('name')
-            # c[group_name] = text_formatting
             if group_name == 'keywords':
-                ks = str.join(r"|", g['words'])
-                rules += [(r'\b%s\b' % ks, text_formatting)]
+                ks = "(\b" + str.join(r"\b)|(\b", g['words']) + "\b)"
+                rules += [(r'%s' % ks, text_formatting)]
                 continue
             if group_name == 'operators':
                 os = str.join(r"|", g['words'])
