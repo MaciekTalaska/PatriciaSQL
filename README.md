@@ -17,9 +17,16 @@ Screenshots:
 Requirements:
 ---------------
 
-- Python (either 2.7x or 3.x)
-- PostgreSQL (it was tested with PosgreSQL 10 & 11)
-- libqt5sql5-psql 
+- `Python` (either 2.7x or 3.x)
+- `PostgreSQL` (it was tested with PosgreSQL 10 & 11)
+- `libqt5sql5-psql`  (PostgreSQL driver for KDE apps, and is required for every app that interacts with PostgreSQL)
+
+Additional dependencies:
+
+|Python 2.x | Python 3.x |
+|-----------|------------|
+| `python-pyqt5` | `python3-pyqt5` |
+| `python-pyqt5.qtsql` | `python3-pyqt5-qtsql` |
 
 Development:
 --------------
@@ -28,18 +35,13 @@ Apart from what is listed above, some additional libraries & tools may be needed
 
 1. Qt Designer (for forms design) `sudo apt install qt-creator`
 2. PyQt5 dev tools: `sudo apt install pyqt5-dev-tools`
-3. You may also need one of the following:
-   For Python3:
-  * python3-pyqt5
-  * python3-pyqt5.qtsql
-   For Python 2.7.x:
-  * python-pyqt5
-  * python-pyqt5.qtsql
 
 In case something doesn't work, try installing:
-  * python-pyside2.qtsql
+  * `python-pyside2.qtsql`
+  
   or
-  * python3-pyside2.qtsql
+  
+  * `python3-pyside2.qtsql`
 
 Todo:
 ------
