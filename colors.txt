@@ -22,6 +22,12 @@
         'regex': ''
     },
     {
+        'name': 'numbers',
+        'color': '0x268bd',
+        'words': [],
+        'regex': r'[+-]?\b\d+\b'
+    },
+    {
         'name': 'strings',
         'color': '0xd33682',
         'words': [],
@@ -32,12 +38,6 @@
         'color': '0xd33682',
         'words': [],
         'regex': r"'[^'\\]*(\\.[^'\\]*)*'"
-    },
-    {
-        'name': 'numbers',
-        'color': '0x268bd',
-        'words': [],
-        'regex': r'[+-]?\b\d+\b'
     },
     {
         'name': 'comments',
