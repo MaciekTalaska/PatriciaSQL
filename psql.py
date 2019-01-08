@@ -2,13 +2,14 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 
-Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
-from db_settings_logic import DBSettingsDialog
-from config import PatriciaConfig
-import syntax
-
 import sys
 import db
+import syntax
+
+from db_settings_logic import DBSettingsDialog
+from config import PatriciaConfig
+Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
@@ -18,12 +19,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.move(QDesktopWidget().availableGeometry().center() - self.frameGeometry().center())
         self.show()
         # wire up signals & slots
-        self.actionQuit.triggered.connect(self.exitApplication)
+        self.actionQuit.triggered.connect(MainWindow.exitApplication)
         self.actionExecute.triggered.connect(self.executeQuery)
-        self.actionExecute_selected.triggered.connect(self.executeSelected)
+        self.actionExecute_selected.triggered.connect(self.executeQuerySelected)
         self.actionSettings.triggered.connect(self.showSettings)
-        self.actionExplain.triggered.connect(self.explain)
-        self.actionExplain_Selected.triggered.connect(self.explain_selected)
+        self.actionExplain.triggered.connect(self.explainQuery)
+        self.actionExplain_Selected.triggered.connect(self.explainSelectedQuery)
         # read config
         self.psqlConfig = PatriciaConfig()
         self.psqlConfig.read()
@@ -31,6 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pgsql = db.PostgreSQL()
         self.updateDBConnection(self.psqlConfig)
 
+    @staticmethod
     def exitApplication(self):
         sys.exit(0)
 
@@ -44,31 +46,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.psqlConfig = newConfig
             self.updateDBConnection(newConfig)
 
-    def explain(self):
+    def explainQuery(self):
         query_text = self.sqlEditorArea.toPlainText()
-        self.__execute_and_explain__(query_text)
+        self.__executeAndExplain__(query_text)
 
-    def explain_selected(self):
-        query_text = self.__extract_selection__()
-        self.__execute_and_explain__(query_text)
-
+    def explainSelectedQuery(self):
+        query_text = self.__extractSelection__()
+        self.__executeAndExplain__(query_text)
 
     def executeQuery(self):
         query_text = self.sqlEditorArea.toPlainText()
-        self.__execute_query(query_text)
+        self.__executeQuery__(query_text)
 
-    def __extract_selection__(self):
-        start = self.sqlEditorArea.textCursor().selectionStart()
-        end = self.sqlEditorArea.textCursor().selectionEnd()
-        whole_text = self.sqlEditorArea.toPlainText()
-        query_text = whole_text[start:end]
-        return query_text
+    def executeQuerySelected(self):
+        query_text = self.__extractSelection__()
+        self.__executeQuery__(query_text)
 
-    def executeSelected(self):
-        query_text = self.__extract_selection__()
-        self.__execute_query(query_text)
-
-    def __execute_query(self, query_text):
+    def __executeQuery__(self, query_text):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
             model = self.pgsql.getModel(query_text)
             self.tableView.setModel(model)
@@ -82,9 +76,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             msg.exec_()
             self.lblstatus.setText("rows: 0")
 
-    def __execute_and_explain__(self, query_text):
+    def __extractSelection__(self):
+        start = self.sqlEditorArea.textCursor().selectionStart()
+        end = self.sqlEditorArea.textCursor().selectionEnd()
+        whole_text = self.sqlEditorArea.toPlainText()
+        query_text = whole_text[start:end]
+        return query_text
+
+    def __executeAndExplain__(self, query_text):
         new_query_text = "explain %s" % query_text
-        self.__execute_query(new_query_text)
+        self.__executeQuery__(new_query_text)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

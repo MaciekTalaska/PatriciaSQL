@@ -3,6 +3,7 @@ import pickle
 configFileName = '__patricia-connection.dat'
 import os
 
+
 class PatriciaConfig:
     def __init__(self):
         self.conp = dict()
@@ -66,13 +67,13 @@ class PatriciaConfig:
 
     def isConnectionDataValid(self):
         return ((self.conp is not None)
-                          and self.host
-                          and self.user
-                          and self.port
-                          and self.password)
+                and self.host
+                and self.user
+                and self.port
+                and self.password)
 
     def isConnectionDataAndDBValid(self):
-       return self.isConnectionDataValid() and self.db
+        return self.isConnectionDataValid() and self.db
 
     # static methods
     @staticmethod
