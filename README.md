@@ -49,7 +49,7 @@ This section should rather be entitled "what would I like to have", as I am not 
 
  - [x] syntax highlighting for PgSQL statements
  - [ ] query execution improvements:
-    - [ ] execute only highlighted text (execute one of many queries)
+    - [x] execute only highlighted text (execute one of many queries)
     - [ ] shortcut for 'execute and explain'
  - [ ] general UI improvements:
    - [ ] additional info on query execution (execution time)

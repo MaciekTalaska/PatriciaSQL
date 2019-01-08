@@ -135,6 +135,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionExecute"/>
+   <addaction name="actionExecute_selected"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -172,6 +173,14 @@
   <action name="actionSettings">
    <property name="text">
     <string>S&amp;ettings</string>
+   </property>
+  </action>
+  <action name="actionExecute_selected">
+   <property name="text">
+    <string>Execute selected</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Return</string>
    </property>
   </action>
  </widget>

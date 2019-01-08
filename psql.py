@@ -20,6 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # wire up signals & slots
         self.actionQuit.triggered.connect(self.exitApplication)
         self.actionExecute.triggered.connect(self.executeQuery)
+        self.actionExecute_selected.triggered.connect(self.executeSelected)
         self.actionSettings.triggered.connect(self.showSettings)
         # read config
         self.psqlConfig = PatriciaConfig()
@@ -43,6 +44,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def executeQuery(self):
         queryText = self.sqlEditorArea.toPlainText()
+        self.__execute_query(queryText)
+
+    def executeSelected(self):
+        start = self.sqlEditorArea.textCursor().selectionStart()
+        end = self.sqlEditorArea.textCursor().selectionEnd()
+        text_length = end - start
+        whole_text = self.sqlEditorArea.toPlainText()
+        queryText = whole_text[start:end]
+        self.__execute_query(queryText)
+
+    def __execute_query(self, queryText):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
             model = self.pgsql.getModel(queryText)
             self.tableView.setModel(model)
@@ -55,7 +67,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
             self.lblstatus.setText("rows: 0")
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
