@@ -137,6 +137,7 @@
    <addaction name="actionExecute"/>
    <addaction name="actionExecute_selected"/>
    <addaction name="actionExplain"/>
+   <addaction name="actionExplain_Selected"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -190,6 +191,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionExplain_Selected">
+   <property name="text">
+    <string>Explain Selected</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+E</string>
    </property>
   </action>
  </widget>

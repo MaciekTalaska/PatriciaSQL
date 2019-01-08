@@ -23,6 +23,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExecute_selected.triggered.connect(self.executeSelected)
         self.actionSettings.triggered.connect(self.showSettings)
         self.actionExplain.triggered.connect(self.explain)
+        self.actionExplain_Selected.triggered.connect(self.explain_selected)
         # read config
         self.psqlConfig = PatriciaConfig()
         self.psqlConfig.read()
@@ -48,18 +49,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__execute_and_explain__(query_text)
 
     def explain_selected(self):
-        pass
+        query_text = self.__extract_selection__()
+        self.__execute_and_explain__(query_text)
+
 
     def executeQuery(self):
         query_text = self.sqlEditorArea.toPlainText()
         self.__execute_query(query_text)
 
-    def executeSelected(self):
+    def __extract_selection__(self):
         start = self.sqlEditorArea.textCursor().selectionStart()
         end = self.sqlEditorArea.textCursor().selectionEnd()
-        text_length = end - start
         whole_text = self.sqlEditorArea.toPlainText()
         query_text = whole_text[start:end]
+        return query_text
+
+    def executeSelected(self):
+        query_text = self.__extract_selection__()
         self.__execute_query(query_text)
 
     def __execute_query(self, query_text):

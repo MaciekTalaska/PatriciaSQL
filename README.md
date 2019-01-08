@@ -48,13 +48,14 @@ Todo:
 This section should rather be entitled "what would I like to have", as I am not sure I will have enough time to work on all of these:
 
  - [x] syntax highlighting for PgSQL statements
+ - [ ] load & save documents (from/to .sql files)
  - [ ] query execution improvements:
     - [x] execute only highlighted text (execute one of many queries)
-    - [ ] shortcut for 'execute and explain'
+    - [x] 'execute and explain' + 'execute selected and explain'
+    - [ ] displaying db errors on query execution
  - [ ] general UI improvements:
-   - [ ] additional info on query execution (execution time)
-   - [ ] displaying db errors on query execution
-   - [ ] solarized-light theme for the editor
+    - [ ] additional info on query execution (execution time)
+    - [ ] solarized-light theme for the editor
  - [ ] auto-complete:
     - [ ] keywords autocomplete
     - [ ] words used autocomplete
