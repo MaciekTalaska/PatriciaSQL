@@ -136,6 +136,7 @@
    </attribute>
    <addaction name="actionExecute"/>
    <addaction name="actionExecute_selected"/>
+   <addaction name="actionExplain"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -177,10 +178,18 @@
   </action>
   <action name="actionExecute_selected">
    <property name="text">
-    <string>Execute selected</string>
+    <string>Execute Selected</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+Return</string>
+   </property>
+  </action>
+  <action name="actionExplain">
+   <property name="text">
+    <string>Explain</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
  </widget>

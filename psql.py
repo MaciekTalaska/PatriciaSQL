@@ -22,6 +22,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExecute.triggered.connect(self.executeQuery)
         self.actionExecute_selected.triggered.connect(self.executeSelected)
         self.actionSettings.triggered.connect(self.showSettings)
+        self.actionExplain.triggered.connect(self.explain)
         # read config
         self.psqlConfig = PatriciaConfig()
         self.psqlConfig.read()
@@ -42,21 +43,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.psqlConfig = newConfig
             self.updateDBConnection(newConfig)
 
+    def explain(self):
+        query_text = self.sqlEditorArea.toPlainText()
+        self.__execute_and_explain__(query_text)
+
+    def explain_selected(self):
+        pass
+
     def executeQuery(self):
-        queryText = self.sqlEditorArea.toPlainText()
-        self.__execute_query(queryText)
+        query_text = self.sqlEditorArea.toPlainText()
+        self.__execute_query(query_text)
 
     def executeSelected(self):
         start = self.sqlEditorArea.textCursor().selectionStart()
         end = self.sqlEditorArea.textCursor().selectionEnd()
         text_length = end - start
         whole_text = self.sqlEditorArea.toPlainText()
-        queryText = whole_text[start:end]
-        self.__execute_query(queryText)
+        query_text = whole_text[start:end]
+        self.__execute_query(query_text)
 
-    def __execute_query(self, queryText):
+    def __execute_query(self, query_text):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
-            model = self.pgsql.getModel(queryText)
+            model = self.pgsql.getModel(query_text)
             self.tableView.setModel(model)
             self.tableView.show()
             self.lblstatus.setText("rows: " + str(model.rowCount()))
@@ -67,6 +75,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
             self.lblstatus.setText("rows: 0")
+
+    def __execute_and_explain__(self, query_text):
+        new_query_text = "explain %s" % query_text
+        self.__execute_query(new_query_text)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
