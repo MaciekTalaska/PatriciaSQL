@@ -25,11 +25,11 @@ I like using shortcuts and most actions are available by key combinations:
 
 <kbd>ctrl</kbd> + <kbd>Enter</kbd> - execute query - this takes whole text from the editor window and treats it as a query
 
-<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>Enter</kdb> - executes only selected text
+<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>Enter</kbd> - executes only selected text
 
-<kbd>ctr</kbd> + <kbd>e</kdb> - performs explain on the query - query is the whole text from the editor control
+<kbd>ctr</kbd> + <kbd>e</kbd> - performs explain on the query - query is the whole text from the editor control
 
-<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>e</kdb> - gets selected text and explain the query
+<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> - gets selected text and explain the query
 
 
 
