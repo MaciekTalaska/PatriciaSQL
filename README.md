@@ -47,20 +47,20 @@ Todo:
 ------
 This section should rather be entitled "what would I like to have", as I am not sure I will have enough time to work on all of these:
 
- - [ ] .deb package
  - [x] syntax highlighting for PgSQL statements
- - [ ] store connection information in human readable format (now it is saved using pickle)
- - [ ] auto-complete:
-    - [ ] keywords autocomplete
-    - [ ] words used autocomplete
-    - [ ] database names, table names, column names... (*)
- - [ ] storing many connection information
- - [ ] execute only highlighted text (execute one of many queries)
- - [ ] shortcut for 'execute as explain'
+ - [ ] query execution improvements:
+    - [ ] execute only highlighted text (execute one of many queries)
+    - [ ] shortcut for 'execute and explain'
  - [ ] general UI improvements:
    - [ ] additional info on query execution (execution time)
    - [ ] displaying db errors on query execution
    - [ ] solarized-light theme for the editor
+ - [ ] auto-complete:
+    - [ ] keywords autocomplete
+    - [ ] words used autocomplete
+    - [ ] database names, table names, column names... (*)
+ - [ ] .deb package
+ - [ ] store connection information in human readable format (now it is saved using pickle)
    
 (*) I am afraid that this is going to be pretty tricky one
 
