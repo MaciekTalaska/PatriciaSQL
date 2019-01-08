@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets, uic
 ui_dialog, _ = uic.loadUiType("db_settings.ui")
 from config import PatriciaConfig
 
+
 class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
     def __init__(self, pgsql, config):
         QtWidgets.QDialog.__init__(self)
@@ -19,7 +20,7 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             self.txtUserName.setText(config.user)
             self.txtPassword.setText(config.password)
             if config.port is not None:
-               self.txtPort.setText(str(config.port))
+                self.txtPort.setText(str(config.port))
             if config.db and self.pgsql.isConnectionOpen():
                 self.setUsedDatabase(config.db)
         # update connection info when a field has been changed

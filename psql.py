@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 
 import sys
 import db
@@ -65,16 +66,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __executeQuery__(self, query_text):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
             model = self.pgsql.getModel(query_text)
+            row_count = model.rowCount()
+            last_error = model.lastError().text()
+            if row_count == 0 and last_error != "":
+                model = QStandardItemModel()
+                model.setHorizontalHeaderLabels(["Error executing query:"])
+                item = QStandardItem(last_error)
+                model.appendRow(item)
             self.tableView.setModel(model)
             self.tableView.show()
-            self.lblstatus.setText("rows: " + str(model.rowCount()))
+            self.tableView.resizeColumnsToContents()
+            self.lblstatus.setText("rows: %d" % row_count)
         else:
-            msg = QMessageBox()
-            msg.setText("Not connected to PostgreSQL!")
-            msg.setWindowTitle("Error executing query!")
-            msg.setIcon(QMessageBox.Critical)
-            msg.exec_()
-            self.lblstatus.setText("rows: 0")
+            self.__show_error_box__("Error executing query!", "Not connected to PostgreSQL!")
+
+    def __show_error_box__(self, title, message):
+        msg = QMessageBox()
+        msg.setText(title)
+        msg.setWindowTitle(message)
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+        self.lblstatus.setText("rows: 0")
 
     def __extractSelection__(self):
         start = self.sqlEditorArea.textCursor().selectionStart()
