@@ -32,6 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # try to connect (most recent connection)
         self.pgsql = db.PostgreSQL()
         self.updateDBConnection(self.psqlConfig)
+        self.verticalautoresize = False
 
     @staticmethod
     def exitApplication(self):
@@ -68,14 +69,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             model, execution_time = self.pgsql.getModel(query_text)
             row_count = model.rowCount()
             last_error = model.lastError().text()
-            if row_count == 0 and last_error != "":
+            error_occured = row_count == 0 and last_error != ""
+            if error_occured:
                 model = QStandardItemModel()
                 model.setHorizontalHeaderLabels(["Error executing query:"])
                 item = QStandardItem(last_error)
                 model.appendRow(item)
             self.tableView.setModel(model)
-            self.tableView.show()
-            self.tableView.resizeColumnsToContents()
+            # resize could cost a lot of time on big results...
+            if error_occured or row_count < 1000:
+                self.tableView.resizeColumnsToContents()
+            if self.verticalautoresize:
+                self.tableView.setRowHeight(0, self.tableView.rowHeight(1))
+                # TODO: this ugly hack probably means I should subclass it...
+                self.verticalautoresize = False
+            if error_occured:
+                self.tableView.resizeRowToContents(0)
+                self.verticalautoresize = True
             self.lblstatus.setText("rows: %d" % row_count)
             self.lblExecutionTime.setText("execution time: %.8fs" % execution_time)
         else:
