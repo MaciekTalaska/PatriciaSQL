@@ -79,9 +79,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # resize could cost a lot of time on big results...
             if error_occured or row_count < 1000:
                 self.tableView.resizeColumnsToContents()
+            # TODO: this ugly hack probably means I should subclass it...
             if self.verticalautoresize:
                 self.tableView.setRowHeight(0, self.tableView.rowHeight(1))
-                # TODO: this ugly hack probably means I should subclass it...
+                self.tableView.resizeColumnToContents(0)
                 self.verticalautoresize = False
             if error_occured:
                 self.tableView.resizeRowToContents(0)
