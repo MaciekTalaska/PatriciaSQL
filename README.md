@@ -1,9 +1,9 @@
 PatriciaSQL
 =============
 
-This is very simple PostgreSQL client written in PyQt (Qt GUI and Python). 
+This is a very simple PostgreSQL client written in PyQt (Qt GUI and Python). 
 
-I am using Debian/Ubuntu compatible operating system + KDE Plasma as my desktop environment. I haven't tested this tool neither on other Linux distros, nor on other operating systems (OXS, Windows etc). This should work without any problems (as both Qt and Python are widely available) but some additional dependencies may be required (especially for database connectivity, or development of the app on other OS).
+I am using a Debian/Ubuntu compatible operating system + KDE Plasma as my desktop environment. I haven't tested this tool on other Linux distros, nor on other operating systems (macOS, Windows etc). This should work without any problems (as both Qt and Python are widely available) but some additional dependencies may be required (especially for database connectivity, or development of the app on other OSes).
 
 
 Screenshots:
@@ -17,19 +17,19 @@ Screenshots:
 Usage:
 ------
 
-After configuring this tool should be ready to use. To configure connection use the "Connection Setup" dialog availabe from the main menu (File->Settings).
+After configuring, this tool should be ready to use. To configure the connection use the "Connection Setup" dialog availabe from the main menu (File->Settings).
 
 Shortcuts:
 ----------
-I like using shortcuts and most actions are available by key combinations:
+I like using shortcuts and most actions are available via key combinations:
 
-<kbd>ctrl</kbd> + <kbd>Enter</kbd> - execute query - this takes whole text from the editor window and treats it as a query
+<kbd>ctrl</kbd> + <kbd>Enter</kbd> - execute query - this takes the whole text from the editor window and treats it as a query
 
-<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>Enter</kbd> - executes only selected text
+<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>Enter</kbd> - executes only the selected text
 
 <kbd>ctr</kbd> + <kbd>e</kbd> - performs explain on the query - query is the whole text from the editor control
 
-<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> - gets selected text and explain the query
+<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> - performs explain on the selected text
 
 
 
@@ -86,4 +86,4 @@ This section should rather be entitled "what would I like to have", as I am not 
 
 Disclaimer:
 --------------
-It was more of an experiment. I have no plans at the moment to make it a "full blown" tool. It should stay simple (and hopefully - fast). There are couple of things I would like to improve (listed in TODO section), but working on it is not very high on my priority list (read: it may happen any moment that I stop working on it).
+This is more of an experiment. I have no plans at the moment to make it a "full blown" tool. It should stay simple (and hopefully - fast). There are a couple of things I would like to improve (listed in TODO section), but working on it is not very high on my priority list (read: I may stop working on it at any moment).
