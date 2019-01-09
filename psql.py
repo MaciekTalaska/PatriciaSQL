@@ -65,7 +65,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __executeQuery__(self, query_text):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
-            model = self.pgsql.getModel(query_text)
+            model, execution_time = self.pgsql.getModel(query_text)
             row_count = model.rowCount()
             last_error = model.lastError().text()
             if row_count == 0 and last_error != "":
@@ -77,6 +77,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableView.show()
             self.tableView.resizeColumnsToContents()
             self.lblstatus.setText("rows: %d" % row_count)
+            self.lblExecutionTime.setText("execution time: %.8fs" % execution_time)
         else:
             self.__show_error_box__("Error executing query!", "Not connected to PostgreSQL!")
 

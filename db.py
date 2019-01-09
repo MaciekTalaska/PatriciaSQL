@@ -1,3 +1,4 @@
+import time
 from PyQt5 import QtSql
 
 
@@ -14,8 +15,10 @@ class PostgreSQL:
 
     def getModel(self, query):
         model = QtSql.QSqlQueryModel()
+        start = time.time()
         model.setQuery(query)
-        return model
+        end = time.time()
+        return model, (end-start)
 
     def getCurrentDBName(self):
         if (self.connection is not None and

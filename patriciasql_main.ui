@@ -76,6 +76,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="lblExecutionTime">
+         <property name="text">
+          <string>execution time:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="lblstatus">
          <property name="text">
           <string>rows:</string>
