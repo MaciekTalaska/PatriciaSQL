@@ -37,6 +37,7 @@ class PgSQLHighlighter(QSyntaxHighlighter):
 
 
     def highlightBlock(self, text):
+        text = text.lower()
         for regx, style in self.rules:
             match = regx.indexIn(text, 0)
             while match > -1:
