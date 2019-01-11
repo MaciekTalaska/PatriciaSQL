@@ -68,12 +68,13 @@ This section should rather be entitled "what would I like to have", as I am not 
 
  - [x] syntax highlighting for PgSQL statements
  - [ ] load & save documents (from/to .sql files)
+ - [ ] save results to .csv
  - [x] query execution improvements:
     - [x] execute only highlighted text (execute one of many queries)
     - [x] 'execute and explain' + 'execute selected and explain'
     - [x] displaying db errors on query execution
  - [ ] general UI improvements:
-    - [ ] additional info on query execution (execution time)
+    - [x] additional info on query execution (execution time)
     - [ ] solarized-light theme for the editor
  - [ ] auto-complete:
     - [ ] keywords autocomplete
