@@ -11,6 +11,15 @@ Screenshots:
 
 ![PatriciaSQL Main Window](PatriciaSQL-main.png)
 
+
+![PatriciaSQL_Main_Window_Explain](PatriciaSQL-main-explain.png)
+
+![Query_Selected](PatriciaSQL-main-execute-selected.png)
+
+![Explain_Selected](PatriciaSQL-main-explain-selected.png)
+
+Query explain
+
 ![PatriciaSQL - connection settings](PatriciaSQL-connection_settings.png)
 
 
