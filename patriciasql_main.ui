@@ -130,11 +130,14 @@
    <property name="minimumSize">
     <size>
      <width>0</width>
-     <height>28</height>
+     <height>0</height>
     </size>
    </property>
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <property name="floatable">
     <bool>false</bool>
@@ -176,6 +179,10 @@
    </property>
   </action>
   <action name="actionExecute">
+   <property name="icon">
+    <iconset>
+     <normaloff>graphics/play-circle-regular.svg</normaloff>graphics/play-circle-regular.svg</iconset>
+   </property>
    <property name="text">
     <string>Execute</string>
    </property>
@@ -189,6 +196,10 @@
    </property>
   </action>
   <action name="actionExecute_selected">
+   <property name="icon">
+    <iconset>
+     <normaloff>graphics/play-circle-solid.svg</normaloff>graphics/play-circle-solid.svg</iconset>
+   </property>
    <property name="text">
     <string>Execute Selected</string>
    </property>
@@ -197,6 +208,10 @@
    </property>
   </action>
   <action name="actionExplain">
+   <property name="icon">
+    <iconset>
+     <normaloff>graphics/question-circle-regular.svg</normaloff>graphics/question-circle-regular.svg</iconset>
+   </property>
    <property name="text">
     <string>Explain</string>
    </property>
@@ -205,6 +220,10 @@
    </property>
   </action>
   <action name="actionExplain_Selected">
+   <property name="icon">
+    <iconset>
+     <normaloff>graphics/question-circle-solid.svg</normaloff>graphics/question-circle-solid.svg</iconset>
+   </property>
    <property name="text">
     <string>Explain Selected</string>
    </property>

@@ -88,12 +88,16 @@ This section should rather be entitled "what would I like to have", as I am not 
 (*) I am afraid that this is going to be pretty tricky one
 
 
-Icon:
------
+Icons used:
+-----------
 
 App icon (temporary) is taken from [ICONFINDER](https://www.iconfinder.com). The icon used is slightly modified [icon](https://www.iconfinder.com/icons/3876341/data_database_extension_file_sql_icon) which is part of [File Extensions Vol 1](https://www.iconfinder.com/iconsets/file-extension-vol-1) iconset.
 Please note, that this icon is being used temporary, until I get an icon made especially for PatriciaSQL.
 Author of the app icon is: [Ravindra Kalkani](https://www.iconfinder.com/UN-icon)
+
+Status bar icons are free [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons.
+
+To my best knowledge both Font Awesome, and the icon I found on IconFinder are free to use for OpenSource projects. If I am mistaken, please let me know.
 
 Disclaimer:
 --------------
