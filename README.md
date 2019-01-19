@@ -14,6 +14,8 @@ Screenshots:
 ![PatriciaSQL - connection settings](PatriciaSQL-connection_settings.png)
 
 
+*Note* for demoing purposes data from [PostgreSQL Exercises](https://pgexercises.com/) is used
+
 Usage:
 ------
 
