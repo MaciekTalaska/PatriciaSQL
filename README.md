@@ -14,7 +14,7 @@ Screenshots:
 ![PatriciaSQL - connection settings](PatriciaSQL-connection_settings.png)
 
 
-*Note* for demoing purposes data from [PostgreSQL Exercises](https://pgexercises.com/) is used
+**Note**: for demoing purposes data from [PostgreSQL Exercises](https://pgexercises.com/) is used
 
 Usage:
 ------
@@ -96,6 +96,8 @@ Please note, that this icon is being used temporary, until I get an icon made es
 Author of the app icon is: [Ravindra Kalkani](https://www.iconfinder.com/UN-icon)
 
 Status bar icons are free [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons.
+Font awesome license: https://fontawesome.com/license
+No changes were made to Font Awesome icons.
 
 To my best knowledge both Font Awesome, and the icon I found on IconFinder are free to use for OpenSource projects. If I am mistaken, please let me know.
 
