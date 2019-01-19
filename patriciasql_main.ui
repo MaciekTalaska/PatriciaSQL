@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>PatriciaSQL</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>graphics/sql_512_white_bg_2.png</normaloff>graphics/sql_512_white_bg_2.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
