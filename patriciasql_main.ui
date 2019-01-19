@@ -152,6 +152,7 @@
    <addaction name="actionExecute_selected"/>
    <addaction name="actionExplain"/>
    <addaction name="actionExplain_Selected"/>
+   <addaction name="actionSnippets"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -229,6 +230,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+E</string>
+   </property>
+  </action>
+  <action name="actionSnippets">
+   <property name="icon">
+    <iconset>
+     <normaloff>graphics/code-solid.svg</normaloff>graphics/code-solid.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Snippets</string>
    </property>
   </action>
  </widget>
