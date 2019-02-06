@@ -36,6 +36,7 @@ class PostgreSQL:
         clone.setHostName(conp.host)
         clone.setPort(conp.port)
         clone.setPassword(conp.password)
+        clone.setDatabaseName('postgres')
         clone.open()
         status = clone.isOpen()
         if status:
@@ -59,6 +60,9 @@ class PostgreSQL:
             self.connection.setUserName(conp.user)
             self.connection.setPassword(conp.password)
             self.connection.setPort(conp.port)
-            self.connection.setDatabaseName(conp.db)
+            if conp.db != "":
+                self.connection.setDatabaseName(conp.db)
+            else:
+                self.connection.setDatabaseName('postgres')
             self.connection.open()
 
