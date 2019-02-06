@@ -56,7 +56,7 @@ Additional dependencies:
 |Python 2.x | Python 3.x |
 |-----------|------------|
 | `python-pyqt5` | `python3-pyqt5` |
-| `python-pyqt5.qtsql` | `python3-pyqt5-qtsql` |
+| `python-pyqt5.qtsql` | `python3-pyqt5.qtsql` |
 
 Development:
 --------------
