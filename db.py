@@ -6,6 +6,15 @@ class PostgreSQL:
     def __init__(self):
         self.connection = QtSql.QSqlDatabase.addDatabase("QPSQL")
 
+    # Posgtgres 9.x does not allow conneting to server without specifying database name
+    # so in case there is a need to connect to retrieve available databases
+    # it is the best to connect to 'Postgres' database
+    def __databaseNameOrPostgres__(self, dbname):
+        if not dbname:
+            return 'postgres'
+        else:
+            return dbname
+
     def reconnect(self, conp):
         if (self.connection is not None and
                 self.connection.isOpen() and
@@ -36,7 +45,8 @@ class PostgreSQL:
         clone.setHostName(conp.host)
         clone.setPort(conp.port)
         clone.setPassword(conp.password)
-        clone.setDatabaseName('postgres')
+        db = self.__databaseNameOrPostgres__(conp.db)
+        clone.setDatabaseName(db)
         clone.open()
         status = clone.isOpen()
         if status:
@@ -60,9 +70,7 @@ class PostgreSQL:
             self.connection.setUserName(conp.user)
             self.connection.setPassword(conp.password)
             self.connection.setPort(conp.port)
-            if conp.db != "":
-                self.connection.setDatabaseName(conp.db)
-            else:
-                self.connection.setDatabaseName('postgres')
+            db = self.__databaseNameOrPostgres__(conp.db)
+            self.connection.setDatabaseName(db)
             self.connection.open()
 
