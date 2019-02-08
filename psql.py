@@ -68,9 +68,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
             model, execution_time = self.pgsql.getModel(query_text)
             row_count = model.rowCount()
-            last_error = model.lastError().text()
-            error_occured = row_count == 0 and last_error
+            error_occured = (row_count == 0) and (model.lastError().isValid()) 
             if error_occured:
+                last_error = model.lastError().text()
                 model = QStandardItemModel()
                 model.setHorizontalHeaderLabels(["Error executing query:"])
                 item = QStandardItem(last_error)
