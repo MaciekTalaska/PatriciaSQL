@@ -69,7 +69,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             model, execution_time = self.pgsql.getModel(query_text)
             row_count = model.rowCount()
             last_error = model.lastError().text()
-            error_occured = row_count == 0 and last_error != ""
+            error_occured = row_count == 0 and last_error
             if error_occured:
                 model = QStandardItemModel()
                 model.setHorizontalHeaderLabels(["Error executing query:"])
@@ -81,7 +81,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.tableView.resizeColumnsToContents()
             # TODO: this ugly hack probably means I should subclass it...
             if self.verticalautoresize:
-                self.tableView.setRowHeight(0, self.tableView.rowHeight(1))
+                self.tableView.setRowHeight(0, 30) # default row height is 30
                 self.tableView.resizeColumnToContents(0)
                 self.verticalautoresize = False
             if error_occured:
