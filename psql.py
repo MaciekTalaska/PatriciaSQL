@@ -6,6 +6,7 @@ from PyQt5.QtGui import *
 import sys
 import db
 import syntax
+import plaintextcompleter
 
 from db_settings_logic import DBSettingsDialog
 from config import PatriciaConfig
@@ -32,7 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # try to connect (most recent connection)
         self.pgsql = db.PostgreSQL()
         self.updateDBConnection(self.psqlConfig)
-        self.verticalautoresize = False
+        self.vertical_resize = False
 
     @staticmethod
     def exitApplication(self):
@@ -68,8 +69,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
             model, execution_time = self.pgsql.getModel(query_text)
             row_count = model.rowCount()
-            error_occured = (row_count == 0) and (model.lastError().isValid()) 
-            if error_occured:
+            error_occurred = (row_count == 0) and (model.lastError().isValid())
+            if error_occurred:
                 last_error = model.lastError().text()
                 model = QStandardItemModel()
                 model.setHorizontalHeaderLabels(["Error executing query:"])
@@ -77,16 +78,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 model.appendRow(item)
             self.tableView.setModel(model)
             # resize could cost a lot of time on big results...
-            if error_occured or row_count < 1000:
+            if error_occurred or row_count < 1000:
                 self.tableView.resizeColumnsToContents()
             # TODO: this ugly hack probably means I should subclass it...
-            if self.verticalautoresize:
+            if self.vertical_resize:
                 self.tableView.setRowHeight(0, 30) # default row height is 30
                 self.tableView.resizeColumnToContents(0)
-                self.verticalautoresize = False
-            if error_occured:
+                self.vertical_resize = False
+            if error_occurred:
                 self.tableView.resizeRowToContents(0)
-                self.verticalautoresize = True
+                self.vertical_resize = True
             self.lblstatus.setText("rows: %d" % row_count)
             self.lblExecutionTime.setText("execution time: %.8fs" % execution_time)
         else:
