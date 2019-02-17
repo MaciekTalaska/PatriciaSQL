@@ -80,6 +80,7 @@ This section should rather be entitled "what would I like to have", as I am not 
  - [x] syntax highlighting for PgSQL statements
  - [ ] load & save documents (from/to .sql files)
  - [ ] save results to .csv
+ - [ ] snippets (table/database creation, modification, removal...)
  - [x] query execution improvements:
     - [x] execute only highlighted text (execute one of many queries)
     - [x] 'execute and explain' + 'execute selected and explain'
@@ -88,7 +89,7 @@ This section should rather be entitled "what would I like to have", as I am not 
     - [x] additional info on query execution (execution time)
     - [ ] solarized-light theme for the editor
  - [ ] auto-complete:
-    - [ ] keywords autocomplete
+    - [x] keywords autocomplete
     - [ ] words used autocomplete
     - [ ] database names, table names, column names... (*)
  - [ ] .deb package
