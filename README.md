@@ -9,17 +9,22 @@ I am using a Debian/Ubuntu compatible operating system + KDE Plasma as my deskto
 Screenshots:
 ------------
 
+Main Window:
 ![PatriciaSQL Main Window](PatriciaSQL-main.png)
 
+Auto-complete for SQL queries:
+![PatriciaSQL-auto-completer](PatriciaSQL-auto-completer.png)
 
+Query explain:
 ![PatriciaSQL_Main_Window_Explain](PatriciaSQL-main-explain.png)
 
+Executing only seleted text:
 ![Query_Selected](PatriciaSQL-main-execute-selected.png)
 
+Explain selected query:
 ![Explain_Selected](PatriciaSQL-main-explain-selected.png)
 
-Query explain
-
+Connection options:
 ![PatriciaSQL - connection settings](PatriciaSQL-connection_settings.png)
 
 
