@@ -6,7 +6,7 @@ from PyQt5.QtGui import *
 import sys
 import db
 import syntax
-import plaintextcompleter
+import sqleditor
 
 from db_settings_logic import DBSettingsDialog
 from config import PatriciaConfig
@@ -34,6 +34,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pgsql = db.PostgreSQL()
         self.updateDBConnection(self.psqlConfig)
         self.vertical_resize = False
+        # setup sql editor
+        completer = sqleditor.SQLKeywordsCompleter()
+        completer.read_keywords("sqlkeywords.txt")
+        self.sqlEditorArea.setCompleter(completer)
 
     @staticmethod
     def exitApplication(self):
