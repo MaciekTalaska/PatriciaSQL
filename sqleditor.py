@@ -32,7 +32,7 @@ class SQLEditor(QtWidgets.QPlainTextEdit):
         extra = len(self.completer.completionPrefix())
         tc.movePosition(QtGui.QTextCursor.Left)
         tc.movePosition(QtGui.QTextCursor.EndOfWord)
-        tc.insertText(completion[extra:])
+        tc.insertText(completion[extra:] + " ")
         self.setTextCursor(tc)
 
     def textUnderCursor(self):
