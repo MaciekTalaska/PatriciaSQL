@@ -9,30 +9,37 @@ class PgSQLHighlighter(QSyntaxHighlighter):
 
         raw_data = open('colors.txt', 'rb').read()
         highlight_data = eval(raw_data)
-        rules = self.process_data(highlight_data)
+        rules = PgSQLHighlighter.create_highlight_rules(highlight_data)
 
         self.rules = [(QRegExp(pattern), color)
                       for (pattern, color) in rules]
 
-    def process_data(self, highlight_defs):
+    # this method process the data from configuration file
+    # and creates array consisting of a tuple:
+    # 1. regex used to search for particular highlight pattern
+    # 2. text format - (QColor)
+    @staticmethod
+    def create_highlight_rules(highlight_definitions):
         rules = []
-        for g in highlight_defs:
+        for group in highlight_definitions:
             # color
-            text_color = g.get('color')
+            text_color = group.get('color')
             color = QColor.fromRgb(int(text_color, 16))
             text_formatting = QTextCharFormat()
             text_formatting.setForeground(color)
             # group name
-            group_name = g.get('name')
+            group_name = group.get('name')
+            # TODO: these two conditionals should be replaced
+            #       by the code that checks if 'words' array is not empty
             if group_name == 'keywords':
-                ks = "(\b" + str.join(r"\b)|(\b", g['words']) + "\b)"
+                ks = "(\b" + str.join(r"\b)|(\b", group['words']) + "\b)"
                 rules += [(r'%s' % ks, text_formatting)]
                 continue
             if group_name == 'operators':
-                os = str.join(r"|", g['words'])
+                os = str.join(r"|", group['words'])
                 rules += [(r'%s' % os, text_formatting)]
                 continue
-            rules += [(g['regex'], text_formatting)]
+            rules += [(group['regex'], text_formatting)]
         return rules
 
 

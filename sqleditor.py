@@ -75,6 +75,9 @@ class SQLEditor(QtWidgets.QPlainTextEdit):
                 (event.text()[:1] in eow)):
             self.completer.popup().hide()
             return
+        self.showPopup(currentText)
+
+    def showPopup(self, currentText):
         if currentText != self.completer.completionPrefix():
             self.completer.setCompletionPrefix(currentText)
             popup = self.completer.popup()
