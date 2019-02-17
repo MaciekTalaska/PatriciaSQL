@@ -1,72 +1,72 @@
 import pickle
-
-configFileName = '__patricia-connection.dat'
 import os
+
+configFileName: str = '__patricia-connection.dat'
 
 
 class PatriciaConfig:
     def __init__(self):
-        self.conp = dict()
+        self.props = dict()
 
     @property
     def user(self):
-        return self.conp.get('user')
+        return self.props.get('user')
 
     @user.setter
-    def user(self, val):
-        self.conp['user'] = val
+    def user(self, val: str):
+        self.props['user'] = val
 
     @property
     def host(self):
-        return self.conp.get('host')
+        return self.props.get('host')
 
     @host.setter
-    def host(self, val):
-        self.conp['host'] = val
+    def host(self, val: str):
+        self.props['host'] = val
 
     @property
     def password(self):
-        return self.conp.get('password')
+        return self.props.get('password')
 
     @password.setter
-    def password(self, val):
-        self.conp['password'] = val
+    def password(self, val: str):
+        self.props['password'] = val
 
     @property
     def port(self):
-        return self.conp.get('port')
+        return self.props.get('port')
 
     @port.setter
-    def port(self, val):
+    def port(self, val: str):
         if val is not None and str(val).isdigit():
-            self.conp['port'] = int(val)
+            self.props['port'] = int(val)
 
     @property
     def db(self):
-        return self.conp.get('db')
+        return self.props.get('db')
 
     @db.setter
-    def db(self, val):
-        self.conp['db'] = val
+    def db(self, val: str):
+        self.props['db'] = val
 
     @property
     def connectionConfig(self):
-        return self.conp
+        return self.props
 
-    def readDefaultConfig(self):
-        self.conp = PatriciaConfig.read()
+    # TODO: to be removed
+    #    def readDefaultConfig(self):
+    #        self.conp = PatriciaConfig.read()
 
     def read(self):
         exists = PatriciaConfig.configExists()
         data = dict()
         if exists:
-            infile = open(configFileName, 'rb')
-            data = pickle.load(infile)
-            infile.close()
-            self.conp = data.conp
+            with open(configFileName, 'rb') as infile:
+                data = pickle.load(infile)
+            self.props = data.conp
 
     def isConnectionDataValid(self):
-        return ((self.conp is not None)
+        return ((self.props is not None)
                 and self.host
                 and self.user
                 and self.port
