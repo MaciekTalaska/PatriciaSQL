@@ -33,7 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connection_config = ConnectionConfig()
         self.connection_config.read()
         # try to connect (most recent connection)
-        self.pgsql = db.PostgreSQL()
+        self.db_connection = db.PostgreSQLConnection()
         self.updateDBConnection(self.connection_config)
         self.vertical_resize = False
         # setup sql editor
@@ -45,12 +45,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def exitApplication(self):
         sys.exit(0)
 
-    def updateDBConnection(self, conp):
-        self.pgsql.reconnect(conp)
-        self.lbldb.setText("connected to: " + self.pgsql.getCurrentDBName())
+    def updateDBConnection(self, connection_settings: ConnectionConfig):
+        self.db_connection.reconnect(connection_settings)
+        self.lbldb.setText("connected to: " + self.db_connection.getCurrentDBName())
 
     def showSettings(self):
-        success, new_config = DBSettingsDialog.getConnectionProperties(self.pgsql, self.connection_config)
+        success, new_config = DBSettingsDialog.getConnectionProperties(self.db_connection, self.connection_config)
         if success:
             self.connection_config = new_config
             self.updateDBConnection(new_config)
@@ -72,8 +72,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__executeQuery__(query_text)
 
     def __executeQuery__(self, query_text):
-        if self.pgsql is not None and self.pgsql.isConnectionOpen():
-            model, execution_time = self.pgsql.getModel(query_text)
+        if self.db_connection is not None and self.db_connection.isConnectionOpen():
+            model, execution_time = self.db_connection.getModel(query_text)
             row_count = model.rowCount()
             sql_error = (row_count == 0) and (model.lastError().isValid())
             if sql_error:

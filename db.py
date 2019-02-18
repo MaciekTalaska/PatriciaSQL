@@ -1,15 +1,15 @@
 import time
 from PyQt5 import QtSql
+from connection_config import ConnectionConfig
 
-
-class PostgreSQL:
+class PostgreSQLConnection:
     def __init__(self):
         self.connection = QtSql.QSqlDatabase.addDatabase("QPSQL")
 
     # Postgres 9.x does not allow connecting to server without specifying database name
     # so in case there is a need to connect to retrieve available databases
     # it is the best to connect to 'Postgres' database
-    def __databaseNameOrPostgres__(self, dbname):
+    def __databaseNameOrPostgres__(self, dbname: str):
         if not dbname:
             return 'postgres'
         else:
@@ -22,7 +22,7 @@ class PostgreSQL:
             self.connection.close()
         self.connect(cp)
 
-    def getModel(self, query):
+    def getModel(self, query: str):
         model = QtSql.QSqlQueryModel()
         start = time.time()
         model.setQuery(query)
@@ -39,7 +39,7 @@ class PostgreSQL:
     def isConnectionOpen(self):
         return self.connection.isOpen()
 
-    def checkConnection(self, cp):
+    def checkConnection(self, cp: ConnectionConfig):
         clone = QtSql.QSqlDatabase.cloneDatabase(self.connection, "connectivityTest")
         clone.setUserName(cp.user)
         clone.setHostName(cp.host)
@@ -54,7 +54,7 @@ class PostgreSQL:
         QtSql.QSqlDatabase.removeDatabase("connectivityTest")
         return status
 
-    def retrieveAvailableDatabases(self, cp):
+    def retrieveAvailableDatabases(self, cp: ConnectionConfig):
         databases = list()
         if not self.connection.isOpen():
             self.connect(cp)
@@ -64,7 +64,7 @@ class PostgreSQL:
                 databases.append(query.value(0))
         return databases
 
-    def connect(self, cp):
+    def connect(self, cp: ConnectionConfig):
         if (cp.isConnectionDataValid()):
             self.connection.setHostName(cp.host)
             self.connection.setUserName(cp.user)
