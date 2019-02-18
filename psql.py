@@ -9,7 +9,7 @@ import syntax
 import sqleditor
 
 from db_settings_logic import DBSettingsDialog
-from config import PatriciaConfig
+from connection_config import ConnectionConfig
 
 DEFAULT_ROW_HEIGHT = 30
 Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
@@ -30,11 +30,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExplain.triggered.connect(self.explainQuery)
         self.actionExplain_Selected.triggered.connect(self.explainSelectedQuery)
         # read config
-        self.psqlConfig = PatriciaConfig()
-        self.psqlConfig.read()
+        self.connection_config = ConnectionConfig()
+        self.connection_config.read()
         # try to connect (most recent connection)
         self.pgsql = db.PostgreSQL()
-        self.updateDBConnection(self.psqlConfig)
+        self.updateDBConnection(self.connection_config)
         self.vertical_resize = False
         # setup sql editor
         completer = sqleditor.SQLKeywordsCompleter()
@@ -50,9 +50,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbldb.setText("connected to: " + self.pgsql.getCurrentDBName())
 
     def showSettings(self):
-        retval, newConfig = DBSettingsDialog.getConnectionProperties(self.pgsql, self.psqlConfig)
+        retval, newConfig = DBSettingsDialog.getConnectionProperties(self.pgsql, self.connection_config)
         if retval == 1:
-            self.psqlConfig = newConfig
+            self.connection_config = newConfig
             self.updateDBConnection(newConfig)
 
     def explainQuery(self):

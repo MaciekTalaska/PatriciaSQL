@@ -1,10 +1,10 @@
 import pickle
 import os
 
-configFileName: str = '__patricia-connection.dat'
+configFileName: str = '_patricia-connection.dat'
 
 
-class PatriciaConfig:
+class ConnectionConfig:
     def __init__(self):
         self.props = dict()
 
@@ -58,12 +58,12 @@ class PatriciaConfig:
     #        self.conp = PatriciaConfig.read()
 
     def read(self):
-        exists = PatriciaConfig.configExists()
+        exists = ConnectionConfig.configExists()
         data = dict()
         if exists:
             with open(configFileName, 'rb') as infile:
                 data = pickle.load(infile)
-            self.props = data.conp
+            self.props = data.props
 
     def isConnectionDataValid(self):
         return ((self.props is not None)

@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic
 
 ui_dialog, _ = uic.loadUiType("db_settings.ui")
-from config import PatriciaConfig
+from connection_config import ConnectionConfig
 
 
 class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
@@ -43,7 +43,7 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             self.cbxDBs.addItem(str(dbs[i]))
 
     def __createConnectionProperties__(self):
-        cp = PatriciaConfig()
+        cp = ConnectionConfig()
         cp.host = self.txtHostName.text()
         cp.port = int(self.txtPort.text())
         cp.user = self.txtUserName.text()
@@ -67,7 +67,7 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
 
     def getConnectionPropertiesInternal(self):
         props = self.__createConnectionProperties__()
-        PatriciaConfig.save(props)
+        ConnectionConfig.save(props)
         return self.__createConnectionProperties__()
 
     def showConnectionState(self):
