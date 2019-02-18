@@ -2,6 +2,7 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.QtSql import *
 
 import sys
 import db
@@ -71,10 +72,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         query_text = self.__extractSelection__()
         self.__executeQuery__(query_text)
 
-    # TODO: add type info
-    def __executeQuery__(self, query_text):
+    def __executeQuery__(self, query: str):
         if self.db_connection is not None and self.db_connection.isConnectionOpen():
-            model, execution_time = self.db_connection.getModel(query_text)
+            model, execution_time = self.db_connection.getModel(query)
             row_count = model.rowCount()
             sql_error = (row_count == 0) and (model.lastError().isValid())
             if sql_error:
@@ -93,8 +93,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.__show_error_box__("Error executing query!", "Not connected to PostgreSQL!")
 
-    # TODO: add type info
-    def extract_last_error(self, model):
+    def extract_last_error(self, model: QSqlQueryModel):
         last_error = model.lastError().text()
         model = QStandardItemModel()
         model.setHorizontalHeaderLabels(["Error executing query:"])
@@ -108,8 +107,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableView.resizeColumnToContents(0)
             self.vertical_resize = False
 
-    # TODO: add type info
-    def __show_error_box__(self, title, message):
+    def __show_error_box__(self, title: str, message: str):
         msg = QMessageBox()
         msg.setText(title)
         msg.setWindowTitle(message)
@@ -124,10 +122,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         query_text = whole_text[start:end]
         return query_text
 
-    # TODO: add type info
-    def __executeAndExplain__(self, query_text):
-        new_query_text = "explain %s" % query_text
-        self.__executeQuery__(new_query_text)
+    def __executeAndExplain__(self, query: str):
+        new_query = "explain %s" % query
+        self.__executeQuery__(new_query)
 
 
 if __name__ == "__main__":
