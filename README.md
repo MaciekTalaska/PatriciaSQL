@@ -18,7 +18,7 @@ Auto-complete for SQL queries:
 Query explain:
 ![PatriciaSQL_Main_Window_Explain](PatriciaSQL-main-explain.png)
 
-Executing only seleted text:
+Executing only selected text:
 ![Query_Selected](PatriciaSQL-main-execute-selected.png)
 
 Explain selected query:
@@ -47,6 +47,7 @@ I like using shortcuts and most actions are available via key combinations:
 
 <kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> - performs explain on the selected text
 
+<kbd>ctrl</kbd> + <kbd>k</kbd> - show auto-complete pop-up with all SQL keywords
 
 
 Requirements:
