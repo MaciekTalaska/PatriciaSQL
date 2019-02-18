@@ -10,6 +10,8 @@ import sqleditor
 
 from db_settings_logic import DBSettingsDialog
 from config import PatriciaConfig
+
+DEFAULT_ROW_HEIGHT = 30
 Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
 
 
@@ -73,29 +75,36 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.pgsql is not None and self.pgsql.isConnectionOpen():
             model, execution_time = self.pgsql.getModel(query_text)
             row_count = model.rowCount()
-            error_occurred = (row_count == 0) and (model.lastError().isValid())
-            if error_occurred:
-                last_error = model.lastError().text()
-                model = QStandardItemModel()
-                model.setHorizontalHeaderLabels(["Error executing query:"])
-                item = QStandardItem(last_error)
-                model.appendRow(item)
+            sql_error = (row_count == 0) and (model.lastError().isValid())
+            if sql_error:
+                model = self.extract_last_error(model)
             self.tableView.setModel(model)
-            # resize could cost a lot of time on big results...
-            if error_occurred or row_count < 1000:
+            # resize could cost a lot of time for big results...
+            if sql_error or row_count < 1000:
                 self.tableView.resizeColumnsToContents()
             # TODO: this ugly hack probably means I should subclass it...
-            if self.vertical_resize:
-                self.tableView.setRowHeight(0, 30) # default row height is 30
-                self.tableView.resizeColumnToContents(0)
-                self.vertical_resize = False
-            if error_occurred:
+            self.restore_first_row_height()
+            if sql_error:
                 self.tableView.resizeRowToContents(0)
                 self.vertical_resize = True
             self.lblstatus.setText("rows: %d" % row_count)
             self.lblExecutionTime.setText("execution time: %.8fs" % execution_time)
         else:
             self.__show_error_box__("Error executing query!", "Not connected to PostgreSQL!")
+
+    def extract_last_error(self, model):
+        last_error = model.lastError().text()
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(["Error executing query:"])
+        item = QStandardItem(last_error)
+        model.appendRow(item)
+        return model
+
+    def restore_first_row_height(self):
+        if self.vertical_resize:
+            self.tableView.setRowHeight(0, DEFAULT_ROW_HEIGHT)  # default row height is 30
+            self.tableView.resizeColumnToContents(0)
+            self.vertical_resize = False
 
     def __show_error_box__(self, title, message):
         msg = QMessageBox()
