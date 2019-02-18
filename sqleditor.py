@@ -70,6 +70,8 @@ class SQLEditor(QtWidgets.QPlainTextEdit):
         isOtherModifier = ((event.modifiers() != QtCore.Qt.NoModifier) and
                            not isCtrlOrShift)
         currentText = self.textUnderCursor()
+        if not self.completer:
+            return
         if (not isShortcut and (isOtherModifier or not event.text() or
                                 len(currentText) < 2) or
                 (event.text()[:1] in eow)):
