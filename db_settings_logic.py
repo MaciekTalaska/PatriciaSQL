@@ -84,8 +84,8 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
     @staticmethod
     def getConnectionProperties(pgsql, config):
         dialog = DBSettingsDialog(pgsql, config)
-        retval = dialog.exec_()
-        newConfig = None
-        if retval == 1:
-            newConfig = dialog.getConnectionPropertiesInternal()
-        return retval, newConfig
+        success = (dialog.exec_() == 1)
+        new_config = None
+        if success:
+            new_config = dialog.getConnectionPropertiesInternal()
+        return success, new_config
