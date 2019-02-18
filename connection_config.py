@@ -49,11 +49,6 @@ class ConnectionConfig:
     def db(self, val: str):
         self.props['db'] = val
 
-# TODO: ready to removal
-#    @property
-#    def connectionConfig(self):
-#        return self.props
-
     def read_configuration(self):
         exists = ConnectionConfig.config_file_exists()
         data = dict()
@@ -76,8 +71,9 @@ class ConnectionConfig:
     def config_file_exists():
         return os.path.isfile(CONNECTION_CONFIG_FILE_NAME)
 
+    # TODO: add type info
     @staticmethod
-    def save_configuration(data):
+    def save_configuration(data: dict):
         filename = CONNECTION_CONFIG_FILE_NAME
         outfile = open(filename, 'wb')
         pickle.dump(data, outfile)
