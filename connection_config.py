@@ -1,7 +1,7 @@
 import pickle
 import os
 
-configFileName: str = '_patricia-connection.dat'
+CONNECTION_CONFIG_FILE_NAME: str = '_patricia-connection.dat'
 
 
 class ConnectionConfig:
@@ -49,40 +49,36 @@ class ConnectionConfig:
     def db(self, val: str):
         self.props['db'] = val
 
-    @property
-    def connectionConfig(self):
-        return self.props
+# TODO: ready to removal
+#    @property
+#    def connectionConfig(self):
+#        return self.props
 
-    # TODO: to be removed
-    #    def readDefaultConfig(self):
-    #        self.conp = PatriciaConfig.read()
-
-    def read(self):
-        exists = ConnectionConfig.configExists()
+    def read_configuration(self):
+        exists = ConnectionConfig.config_file_exists()
         data = dict()
         if exists:
-            with open(configFileName, 'rb') as infile:
+            with open(CONNECTION_CONFIG_FILE_NAME, 'rb') as infile:
                 data = pickle.load(infile)
             self.props = data.props
 
-    def isConnectionDataValid(self):
+    def validate_connection_data(self):
         return ((self.props is not None)
                 and self.host
                 and self.user
                 and self.port
                 and self.password)
 
-    def isConnectionDataAndDBValid(self):
-        return self.isConnectionDataValid() and self.db
-
-    # static methods
-    @staticmethod
-    def configExists():
-        return os.path.isfile(configFileName)
+    def validate_connection_data_and_dbname(self):
+        return self.validate_connection_data() and self.db
 
     @staticmethod
-    def save(data):
-        filename = configFileName
+    def config_file_exists():
+        return os.path.isfile(CONNECTION_CONFIG_FILE_NAME)
+
+    @staticmethod
+    def save_configuration(data):
+        filename = CONNECTION_CONFIG_FILE_NAME
         outfile = open(filename, 'wb')
         pickle.dump(data, outfile)
         outfile.close()

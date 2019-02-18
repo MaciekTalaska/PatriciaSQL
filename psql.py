@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExplain_Selected.triggered.connect(self.explainSelectedQuery)
         # read config
         self.connection_config = ConnectionConfig()
-        self.connection_config.read()
+        self.connection_config.read_configuration()
         # try to connect (most recent connection)
         self.db_connection = db.PostgreSQLConnection()
         self.updateDBConnection(self.connection_config)
@@ -71,6 +71,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         query_text = self.__extractSelection__()
         self.__executeQuery__(query_text)
 
+    # TODO: add type info
     def __executeQuery__(self, query_text):
         if self.db_connection is not None and self.db_connection.isConnectionOpen():
             model, execution_time = self.db_connection.getModel(query_text)
@@ -92,6 +93,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.__show_error_box__("Error executing query!", "Not connected to PostgreSQL!")
 
+    # TODO: add type info
     def extract_last_error(self, model):
         last_error = model.lastError().text()
         model = QStandardItemModel()
@@ -106,6 +108,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableView.resizeColumnToContents(0)
             self.vertical_resize = False
 
+    # TODO: add type info
     def __show_error_box__(self, title, message):
         msg = QMessageBox()
         msg.setText(title)
@@ -121,6 +124,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         query_text = whole_text[start:end]
         return query_text
 
+    # TODO: add type info
     def __executeAndExplain__(self, query_text):
         new_query_text = "explain %s" % query_text
         self.__executeQuery__(new_query_text)

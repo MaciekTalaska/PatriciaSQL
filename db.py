@@ -15,10 +15,10 @@ class PostgreSQLConnection:
         else:
             return dbname
 
-    def reconnect(self, cp):
+    def reconnect(self, cp: ConnectionConfig):
         if (self.connection is not None and
                 self.connection.isOpen() and
-                cp.isConnectionDataAndDBValid()):
+                cp.validate_connection_data_and_dbname()):
             self.connection.close()
         self.connect(cp)
 
@@ -65,7 +65,7 @@ class PostgreSQLConnection:
         return databases
 
     def connect(self, cp: ConnectionConfig):
-        if (cp.isConnectionDataValid()):
+        if (cp.validate_connection_data()):
             self.connection.setHostName(cp.host)
             self.connection.setUserName(cp.user)
             self.connection.setPassword(cp.password)

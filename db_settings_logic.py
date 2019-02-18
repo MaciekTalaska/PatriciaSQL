@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, uic
+from connection_config import ConnectionConfig
+from db import PostgreSQLConnection
 
 ui_dialog, _ = uic.loadUiType("db_settings.ui")
-from connection_config import ConnectionConfig
 
 
 class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
@@ -29,9 +30,9 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         self.txtHostName.editingFinished.connect(self.showConnectionState)
         self.txtPort.editingFinished.connect(self.showConnectionState)
 
-    def setUsedDatabase(self, dbname):
+    def setUsedDatabase(self, db_name: str):
         self.__populateAvailableDBs__()
-        self.cbxDBs.setCurrentText(dbname)
+        self.cbxDBs.setCurrentText(db_name)
 
     def resetPort(self):
         self.txtPort.setText('5432')
@@ -52,27 +53,27 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         return cp
 
     def __testConnection__(self):
-        connProps = self.__createConnectionProperties__()
+        connection_properties = self.__createConnectionProperties__()
         msg = QtWidgets.QMessageBox()
-        if self.pgsql.checkConnection(connProps):
+        if self.pgsql.checkConnection(connection_properties):
             msg.setWindowTitle("Success!")
-            msg.setText("Connection to database established succesfully")
+            msg.setText("Connection to database established successfully")
             msg.setIcon(QtWidgets.QMessageBox.Information)
             msg.exec_()
         else:
-            msg.setWindowTitle("Erorr!")
+            msg.setWindowTitle("Error!")
             msg.setText("Unable to connect to PostgreSQL server!")
             msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.exec_()
 
     def getConnectionPropertiesInternal(self):
         props = self.__createConnectionProperties__()
-        ConnectionConfig.save(props)
+        ConnectionConfig.save_configuration(props)
         return self.__createConnectionProperties__()
 
     def showConnectionState(self):
-        connectionProperties = self.__createConnectionProperties__()
-        if self.pgsql.checkConnection(connectionProperties):
+        connection_properties = self.__createConnectionProperties__()
+        if self.pgsql.checkConnection(connection_properties):
             self.lblConnectionState.setText("success!")
             self.lblConnectionState.setStyleSheet("color:rgb(85, 170, 127)")
             if self.cbxDBs.count() < 1:
@@ -82,8 +83,8 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             self.lblConnectionState.setStyleSheet("color:rgb(170, 0, 0)")
 
     @staticmethod
-    def getConnectionProperties(pgsql, config):
-        dialog = DBSettingsDialog(pgsql, config)
+    def getConnectionProperties(connection: PostgreSQLConnection, connection_config: ConnectionConfig):
+        dialog = DBSettingsDialog(connection, connection_config)
         success = (dialog.exec_() == 1)
         new_config = None
         if success:
