@@ -1,9 +1,9 @@
 PatriciaSQL
 =============
 
-This is a very simple PostgreSQL client written in PyQt (Qt GUI and Python). 
+PatriciaSQL is simple PostgreSQL client written in PyQt (Qt GUI and Python). 
 
-I am using a Debian/Ubuntu compatible operating system + KDE Plasma as my desktop environment. I haven't tested this tool on other Linux distros, nor on other operating systems (macOS, Windows etc). This should work without any problems (as both Qt and Python are widely available) but some additional dependencies may be required (especially for database connectivity, or development of the app on other OSes).
+This tool has been developed under Kubuntu. PatriciaSQL has not been tested on other Linux distros, nor on other OSes (OSX, Windows, *BSD). PatriciaSQL should work without any problems as long as dependencies are met (see: [requirements](https://github.com/MaciekTalaska/PatriciaSQL#requirements) section for more info). Please mind that on some OSes additional dependencies may be required.
 
 
 Screenshots:
@@ -30,12 +30,12 @@ Connection options:
 
 **Note**: for demoing purposes data from [PostgreSQL Exercises](https://pgexercises.com/) is used
 
-**Note2**: in case of connection problems - try to remove configuration file ("_patricia_connection.dat"). If this does not work - please report a bug. Thanks
+**Note**: in case of connectivity problems - try removing configuration file that stores information of the last database connection used (`_patricia_connection.dat`). If this does not work - please report a bug. Thanks!
 
 Usage:
 ------
 
-After configuring, this tool should be ready to use. To configure the connection use the "Connection Setup" dialog availabe from the main menu (File->Settings).
+After setting up the connection, PatriciaSQL should be ready to use. To configure the connection use the "Connection Setup" dialog available from the main menu (`File -> Settings`).
 
 Shortcuts:
 ----------
@@ -43,11 +43,11 @@ I like using shortcuts and most actions are available via key combinations:
 
 <kbd>ctrl</kbd> + <kbd>Enter</kbd> - execute query - this takes the whole text from the editor window and treats it as a query
 
-<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>Enter</kbd> - executes only the selected text
+<kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>Enter</kbd> - executes only the selected text
 
-<kbd>ctr</kbd> + <kbd>e</kbd> - performs explain on the query - query is the whole text from the editor control
+<kbd>ctrl</kbd> + <kbd>e</kbd> - performs explain on the query - query is the whole text from the editor control
 
-<kbd>ctr</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> - performs explain on the selected text
+<kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> - performs explain on the selected text
 
 <kbd>ctrl</kbd> + <kbd>k</kbd> - show auto-complete pop-up with all SQL keywords
 
@@ -56,8 +56,8 @@ Requirements:
 ---------------
 
 - `Python` (either 2.7x or 3.x)
-- `PostgreSQL` (it was tested with PosgreSQL 10 & 11)
-- `libqt5sql5-psql`  (PostgreSQL driver for KDE apps, and is required for every app that interacts with PostgreSQL)
+- `PostgreSQL` (tested with PosgreSQL 9, 10 & 11)
+- `libqt5sql5-psql`  (PostgreSQL driver for KDE apps. It is required by any app that interacts with PostgreSQL)
 
 Additional dependencies:
 
@@ -74,7 +74,7 @@ Apart from what is listed above, some additional libraries & tools may be needed
 1. Qt Designer (for forms design) `sudo apt install qt-creator`
 2. PyQt5 dev tools: `sudo apt install pyqt5-dev-tools`
 
-In case something doesn't work, try installing:
+In case something does not work, try installing:
   * `python-pyside2.qtsql`
   
   or
@@ -83,10 +83,10 @@ In case something doesn't work, try installing:
 
 Todo:
 ------
-This section should rather be entitled "what would I like to have", as I am not sure I will have enough time to work on all of these:
+This section should rather be entitled *"what would I like to have"*, as I am not sure I will have enough time to work on all of these:
 
  - [x] syntax highlighting for PgSQL statements
- - [ ] load & save documents (from/to .sql files)
+ - [ ] load & save queries (from/to .sql files)
  - [x] save results to .csv
  - [ ] snippets (table/database creation, modification, removal...)
  - [x] query execution improvements:
@@ -109,15 +109,17 @@ This section should rather be entitled "what would I like to have", as I am not 
 Icons used:
 -----------
 
-App icon (temporary) is taken from [ICONFINDER](https://www.iconfinder.com). The icon used is slightly modified [icon](https://www.iconfinder.com/icons/3876341/data_database_extension_file_sql_icon) which is part of [File Extensions Vol 1](https://www.iconfinder.com/iconsets/file-extension-vol-1) iconset.
-Please note, that this icon is being used temporary, until I get an icon made especially for PatriciaSQL.
+App icon is taken from [ICONFINDER](https://www.iconfinder.com). The icon used is slightly modified [icon](https://www.iconfinder.com/icons/3876341/data_database_extension_file_sql_icon) which is part of [File Extensions Vol 1](https://www.iconfinder.com/iconsets/file-extension-vol-1) iconset.
 Author of the app icon is: [Ravindra Kalkani](https://www.iconfinder.com/UN-icon)
+Please note, that this icon is being used temporarily - until I get an icon made especially for PatriciaSQL.
 
 Status bar icons are free [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons.
 Font awesome license: https://fontawesome.com/license
+
 No changes were made to Font Awesome icons.
 
-To my best knowledge both Font Awesome, and the icon I found on IconFinder are free to use for OpenSource projects. If I am mistaken, please let me know.
+
+To my best knowledge both Font Awesome, and the icon I found on IconFinder are free to use for OpenSource projects. If I am mistaken - let me know, please.
 
 Disclaimer:
 --------------
