@@ -10,25 +10,27 @@ Screenshots:
 ------------
 
 Main Window:
-![PatriciaSQL Main Window](PatriciaSQL-main.png)
+![PatriciaSQL Main Window](doc/PatriciaSQL-main.png)
 
 Auto-complete for SQL queries:
-![PatriciaSQL-auto-completer](PatriciaSQL-auto-completer.png)
+![PatriciaSQL-auto-completer](doc/PatriciaSQL-auto-completer.png)
 
 Query explain:
-![PatriciaSQL_Main_Window_Explain](PatriciaSQL-main-explain.png)
+![PatriciaSQL_Main_Window_Explain](doc/PatriciaSQL-main-explain.png)
 
 Executing only selected text:
-![Query_Selected](PatriciaSQL-main-execute-selected.png)
+![Query_Selected](doc/PatriciaSQL-main-execute-selected.png)
 
 Explain selected query:
-![Explain_Selected](PatriciaSQL-main-explain-selected.png)
+![Explain_Selected](doc/PatriciaSQL-main-explain-selected.png)
 
 Connection options:
-![PatriciaSQL - connection settings](PatriciaSQL-connection_settings.png)
+![PatriciaSQL - connection settings](doc/PatriciaSQL-connection_settings.png)
 
 
 **Note**: for demoing purposes data from [PostgreSQL Exercises](https://pgexercises.com/) is used
+
+**Note2**: in case of connection problems - try to remove configuration file ("_patricia_connection.dat"). If this does not work - please report a bug. Thanks
 
 Usage:
 ------
