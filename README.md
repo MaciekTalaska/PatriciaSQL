@@ -92,7 +92,7 @@ This section should rather be entitled *"what would I like to have"*, as I am no
  - [x] query execution improvements:
     - [x] execute only highlighted text (execute one of many queries)
     - [x] 'execute and explain' + 'execute selected and explain'
-    - [x] displaying db errors on query execution
+    - [x] display db errors on query execution
  - [ ] general UI improvements:
     - [x] additional info on query execution (execution time)
     - [ ] solarized-light theme for the editor
