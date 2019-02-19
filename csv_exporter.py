@@ -1,10 +1,10 @@
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
-
+from PyQt5 import QtSql
 
 class CSV:
     @staticmethod
-    def write_csv(model):
+    def write_csv(model: QtSql.QSqlQueryModel):
         file_filter = "CSV files (*.csv)"
         filename, _ = QtWidgets.QFileDialog.getSaveFileName(None, "Export data to CSV",
                                                             ".",
