@@ -1,7 +1,7 @@
-import pickle
+import json
 import os
 
-CONNECTION_CONFIG_FILE_NAME: str = '_patricia-connection.dat'
+CONNECTION_CONFIG_FILE_NAME: str = '_patricia-connection.json'
 
 
 class ConnectionConfig:
@@ -51,11 +51,11 @@ class ConnectionConfig:
 
     def read_configuration(self):
         exists = ConnectionConfig.config_file_exists()
-        data = dict()
         if exists:
-            with open(CONNECTION_CONFIG_FILE_NAME, 'rb') as infile:
-                data = pickle.load(infile)
-            self.props = data.props
+            with open(CONNECTION_CONFIG_FILE_NAME, 'r') as infile:
+                content = infile.read()
+                data = json.loads(content)
+            self.props = data
 
     def validate_connection_data(self, include_db: bool = False):
         connection_valid = ((self.props is not None)
@@ -69,12 +69,12 @@ class ConnectionConfig:
     def config_file_exists():
         return os.path.isfile(CONNECTION_CONFIG_FILE_NAME)
 
+    # TODO: type info should be added (ConnectionConfig can not be used)
     @staticmethod
-    def save_configuration(data: dict):
-        filename = CONNECTION_CONFIG_FILE_NAME
-        outfile = open(filename, 'wb')
-        pickle.dump(data, outfile)
-        outfile.close()
+    def save_configuration(data):
+        with open(CONNECTION_CONFIG_FILE_NAME, 'w') as outfile:
+            content = json.dumps(data.props, sort_keys=True, indent=4, separators=(',', ': '))
+            outfile.write(content)
 
     @staticmethod
     def from_data(host: str, user: str, password: str, port: str = '5432', db: str = 'postgres'):

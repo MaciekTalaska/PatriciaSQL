@@ -30,7 +30,7 @@ Connection options:
 
 **Note**: for demoing purposes data from [PostgreSQL Exercises](https://pgexercises.com/) is used
 
-**Note**: in case of connectivity problems - try removing configuration file that stores information of the last database connection used (`_patricia_connection.dat`). If this does not work - please report a bug. Thanks!
+**Note**: in case of connectivity problems - try removing/editing configuration file that stores information of the last database connection used (`_patricia_connection.json`). If this does not work - please report a bug. Thanks!
 
 Usage:
 ------
@@ -101,7 +101,7 @@ This section should rather be entitled *"what would I like to have"*, as I am no
     - [ ] words used autocomplete
     - [ ] database names, table names, column names... (*)
  - [ ] .deb package
- - [ ] store connection information in human readable format (now it is saved using pickle)
+ - [x] store connection information in human readable format
    
 (*) I am afraid that this is going to be pretty tricky one
 
