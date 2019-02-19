@@ -6,11 +6,11 @@ ui_dialog, _ = uic.loadUiType("db_settings.ui")
 
 
 class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
-    def __init__(self, pgsql, config):
+    def __init__(self, connection: PostgreSQLConnection, config: ConnectionConfig):
         QtWidgets.QDialog.__init__(self)
         ui_dialog.__init__(self)
         self.setupUi(self)
-        self.pgsql = pgsql
+        self.connection = connection
         self.btnResetPort.clicked.connect(self.resetPort)
         self.btnTestConnection.clicked.connect(self.__testConnection__)
         self.btnBrowseDatabases.clicked.connect(self.__populateAvailableDBs__)
@@ -22,7 +22,7 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             self.txtPassword.setText(config.password)
             if config.port is not None:
                 self.txtPort.setText(str(config.port))
-            if config.db and self.pgsql.isConnectionOpen():
+            if config.db and self.connection.isConnectionOpen():
                 self.setUsedDatabase(config.db)
         # update connection info when a field has been changed
         self.txtUserName.editingFinished.connect(self.showConnectionState)
@@ -38,24 +38,24 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         self.txtPort.setText('5432')
 
     def __populateAvailableDBs__(self):
-        conp = self.__createConnectionProperties__()
-        dbs = self.pgsql.retrieveAvailableDatabases(conp)
-        for i in range(len(dbs)):
-            self.cbxDBs.addItem(str(dbs[i]))
+        connection_config = self.__createConnectionConfig__()
+        db_names = self.connection.retrieveAvailableDatabases(connection_config)
+        for i in range(len(db_names)):
+            self.cbxDBs.addItem(str(db_names[i]))
 
-    def __createConnectionProperties__(self):
-        cp = ConnectionConfig()
-        cp.host = self.txtHostName.text()
-        cp.port = int(self.txtPort.text())
-        cp.user = self.txtUserName.text()
-        cp.password = self.txtPassword.text()
-        cp.db = self.cbxDBs.currentText()
-        return cp
+    def __createConnectionConfig__(self):
+        config = ConnectionConfig.from_data(
+            self.txtHostName.text(),
+            self.txtUserName.text(),
+            self.txtPassword.text(),
+            self.txtPort.text(),
+            self.cbxDBs.currentText())
+        return config
 
     def __testConnection__(self):
-        connection_properties = self.__createConnectionProperties__()
+        connection_config = self.__createConnectionConfig__()
         msg = QtWidgets.QMessageBox()
-        if self.pgsql.checkConnection(connection_properties):
+        if self.connection.checkConnection(connection_config):
             msg.setWindowTitle("Success!")
             msg.setText("Connection to database established successfully")
             msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -66,14 +66,9 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
             msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.exec_()
 
-    def getConnectionPropertiesInternal(self):
-        props = self.__createConnectionProperties__()
-        ConnectionConfig.save_configuration(props)
-        return self.__createConnectionProperties__()
-
     def showConnectionState(self):
-        connection_properties = self.__createConnectionProperties__()
-        if self.pgsql.checkConnection(connection_properties):
+        connection_config = self.__createConnectionConfig__()
+        if self.connection.checkConnection(connection_config):
             self.lblConnectionState.setText("success!")
             self.lblConnectionState.setStyleSheet("color:rgb(85, 170, 127)")
             if self.cbxDBs.count() < 1:
@@ -81,6 +76,11 @@ class DBSettingsDialog(QtWidgets.QDialog, ui_dialog):
         else:
             self.lblConnectionState.setText("error connecting...")
             self.lblConnectionState.setStyleSheet("color:rgb(170, 0, 0)")
+
+    def getConnectionPropertiesInternal(self):
+        connection_config = self.__createConnectionConfig__()
+        ConnectionConfig.save_configuration(connection_config)
+        return self.__createConnectionConfig__()
 
     @staticmethod
     def getConnectionProperties(connection: PostgreSQLConnection, connection_config: ConnectionConfig):

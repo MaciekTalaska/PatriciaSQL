@@ -57,24 +57,31 @@ class ConnectionConfig:
                 data = pickle.load(infile)
             self.props = data.props
 
-    def validate_connection_data(self):
-        return ((self.props is not None)
-                and self.host
-                and self.user
-                and self.port
-                and self.password)
-
-    def validate_connection_data_and_dbname(self):
-        return self.validate_connection_data() and self.db
+    def validate_connection_data(self, include_db: bool = False):
+        connection_valid = ((self.props is not None)
+                            and self.host
+                            and self.user
+                            and self.password
+                            and self.port)
+        return connection_valid and (self.db or (not include_db))
 
     @staticmethod
     def config_file_exists():
         return os.path.isfile(CONNECTION_CONFIG_FILE_NAME)
 
-    # TODO: add type info
     @staticmethod
     def save_configuration(data: dict):
         filename = CONNECTION_CONFIG_FILE_NAME
         outfile = open(filename, 'wb')
         pickle.dump(data, outfile)
         outfile.close()
+
+    @staticmethod
+    def from_data(host: str, user: str, password: str, port: str = '5432', db: str = 'postgres'):
+        config = ConnectionConfig()
+        config.host = host
+        config.user = user
+        config.password = password
+        config.port = port
+        config.db = db
+        return config

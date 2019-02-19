@@ -18,7 +18,7 @@ class PostgreSQLConnection:
     def reconnect(self, cp: ConnectionConfig):
         if (self.connection is not None and
                 self.connection.isOpen() and
-                cp.validate_connection_data_and_dbname()):
+                cp.validate_connection_data(True)):
             self.connection.close()
         self.connect(cp)
 
