@@ -86,7 +86,7 @@ Todo:
 This section should rather be entitled *"what would I like to have"*, as I am not sure I will have enough time to work on all of these:
 
  - [x] syntax highlighting for PgSQL statements
- - [ ] load & save queries (from/to .sql files)
+ - [x] load & save queries (from/to .sql files)
  - [x] save results to .csv
  - [ ] snippets (table/database creation, modification, removal...)
  - [x] query execution improvements:

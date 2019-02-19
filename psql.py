@@ -10,6 +10,7 @@ import db
 import syntax
 import sqleditor
 import csv_exporter
+import sql_file
 
 from db_settings_logic import DBSettingsDialog
 from connection_config import ConnectionConfig
@@ -33,6 +34,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionExplain.triggered.connect(self.explainQuery)
         self.actionExplain_Selected.triggered.connect(self.explainSelectedQuery)
         self.actionExportCSV.triggered.connect(self.write_csv)
+        self.actionSave.triggered.connect(self.save)
+        self.actionOpen.triggered.connect(self.open)
         # read config
         self.connection_config = ConnectionConfig()
         self.connection_config.read_configuration()
@@ -132,6 +135,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def write_csv(self):
         model = self.tableView.model()
         csv_exporter.CSV.write_csv(model)
+
+    def save(self):
+        data = self.sqlEditorArea.toPlainText()
+        sql_file.SQLFile.save(data)
+
+    def open(self):
+        if len(self.sqlEditorArea.toPlainText()) > 0:
+            answer = QMessageBox.question(self, "Possible data loss", "Editor is not empty. Load another file?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if answer == QMessageBox.No:
+                return
+        data = sql_file.SQLFile.load()
+        self.sqlEditorArea.setPlainText(data)
 
 
 if __name__ == "__main__":
