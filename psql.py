@@ -5,9 +5,11 @@ from PyQt5.QtGui import *
 from PyQt5.QtSql import *
 
 import sys
+
 import db
 import syntax
 import sqleditor
+import csv_exporter
 
 from db_settings_logic import DBSettingsDialog
 from connection_config import ConnectionConfig
@@ -30,6 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionSettings.triggered.connect(self.showSettings)
         self.actionExplain.triggered.connect(self.explainQuery)
         self.actionExplain_Selected.triggered.connect(self.explainSelectedQuery)
+        self.actionExportCSV.triggered.connect(self.write_csv)
         # read config
         self.connection_config = ConnectionConfig()
         self.connection_config.read_configuration()
@@ -125,6 +128,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __executeAndExplain__(self, query: str):
         new_query = "explain %s" % query
         self.__executeQuery__(new_query)
+
+    def write_csv(self):
+        model = self.tableView.model()
+        csv_exporter.CSV.write_csv(model)
 
 
 if __name__ == "__main__":

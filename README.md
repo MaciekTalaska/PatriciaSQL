@@ -87,7 +87,7 @@ This section should rather be entitled "what would I like to have", as I am not 
 
  - [x] syntax highlighting for PgSQL statements
  - [ ] load & save documents (from/to .sql files)
- - [ ] save results to .csv
+ - [x] save results to .csv
  - [ ] snippets (table/database creation, modification, removal...)
  - [x] query execution improvements:
     - [x] execute only highlighted text (execute one of many queries)

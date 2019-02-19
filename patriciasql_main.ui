@@ -153,6 +153,7 @@
    <addaction name="actionExplain"/>
    <addaction name="actionExplain_Selected"/>
    <addaction name="actionSnippets"/>
+   <addaction name="actionExportCSV"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -239,6 +240,15 @@
    </property>
    <property name="text">
     <string>Snippets</string>
+   </property>
+  </action>
+  <action name="actionExportCSV">
+   <property name="icon">
+    <iconset>
+     <normaloff>graphics/file-csv-solid.svg</normaloff>graphics/file-csv-solid.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Export to CSV</string>
    </property>
   </action>
  </widget>
