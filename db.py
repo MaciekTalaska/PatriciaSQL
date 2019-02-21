@@ -9,11 +9,11 @@ class PostgreSQLConnection:
     # Postgres 9.x does not allow connecting to server without specifying database name
     # so in case there is a need to connect to retrieve available databases
     # it is the best to connect to 'Postgres' database
-    def __databaseNameOrPostgres__(self, dbname: str):
-        if not dbname:
+    def __databaseNameOrPostgres__(self, db: str):
+        if not db:
             return 'postgres'
         else:
-            return dbname
+            return db
 
     def reconnect(self, cp: ConnectionConfig):
         if (self.connection is not None and
