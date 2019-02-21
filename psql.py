@@ -26,6 +26,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.highlight = syntax.PgSQLHighlighter(self.sqlEditorArea.document())
         self.move(QDesktopWidget().availableGeometry().center() - self.frameGeometry().center())
         self.show()
+        # setup sql editor
+        completer = sqleditor.SQLKeywordsCompleter()
+        completer.read_keywords("sqlkeywords.txt")
+        self.sqlEditorArea.setCompleter(completer)
         # wire up signals & slots
         self.actionQuit.triggered.connect(MainWindow.exitApplication)
         self.actionExecute.triggered.connect(self.executeQuery)
@@ -43,10 +47,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.db_connection = db.PostgreSQLConnection()
         self.updateDBConnection(self.connection_config)
         self.vertical_resize = False
-        # setup sql editor
-        completer = sqleditor.SQLKeywordsCompleter()
-        completer.read_keywords("sqlkeywords.txt")
-        self.sqlEditorArea.setCompleter(completer)
 
     @staticmethod
     def exitApplication(self):
@@ -55,6 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateDBConnection(self, connection_settings: ConnectionConfig):
         self.db_connection.reconnect(connection_settings)
         self.lbldb.setText("connected to: " + self.db_connection.getCurrentDBName())
+        self.listView.setModel(self.db_connection.get_tables())
 
     def showSettings(self):
         success, new_config = DBSettingsDialog.getConnectionProperties(self.db_connection, self.connection_config)

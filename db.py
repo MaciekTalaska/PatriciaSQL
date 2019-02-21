@@ -74,3 +74,9 @@ class PostgreSQLConnection:
             self.connection.setDatabaseName(db)
             self.connection.open()
 
+    def get_tables(self):
+        if self.isConnectionOpen():
+            model = QtSql.QSqlQueryModel()
+            model.setQuery("SELECT table_schema || '.' || table_name || ' (' || LEFT(table_type,1) || ')'  "
+                           "FROM information_schema.tables")
+            return model
