@@ -55,7 +55,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateDBConnection(self, connection_settings: ConnectionConfig):
         self.db_connection.reconnect(connection_settings)
         self.lbldb.setText("connected to: " + self.db_connection.getCurrentDBName())
-        self.listView.setModel(self.db_connection.get_tables())
+        tables = self.db_connection.get_tables()
+        self.listView.setModel(tables)
 
     def showSettings(self):
         success, new_config = DBSettingsDialog.getConnectionProperties(self.db_connection, self.connection_config)
