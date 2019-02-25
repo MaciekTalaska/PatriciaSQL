@@ -30,6 +30,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         completer = sqleditor.SQLKeywordsCompleter()
         completer.read_keywords("sqlkeywords.txt")
         self.sqlEditorArea.setCompleter(completer)
+        # setup statusbar
+        self.lbldb = QLabel()
+        self.lbldb.setText("connected to:")
+        self.lblExecutionTime = QLabel()
+        self.lblExecutionTime.setText("execution time:")
+        self.lblstatus = QLabel()
+        self.lblstatus.setText("rows:")
+        self.statusBar.addPermanentWidget(self.lbldb, 1)
+        self.statusBar.addPermanentWidget(self.lblExecutionTime, 1)
+        self.statusBar.addPermanentWidget(self.lblstatus, 1)
         # wire up signals & slots
         self.actionQuit.triggered.connect(MainWindow.exitApplication)
         self.actionExecute.triggered.connect(self.executeQuery)
