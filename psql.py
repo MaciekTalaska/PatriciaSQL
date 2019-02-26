@@ -14,6 +14,7 @@ import sql_file
 
 from db_settings_logic import DBSettingsDialog
 from connection_config import ConnectionConfig
+from pgtreeview import PgTreeView
 
 DEFAULT_ROW_HEIGHT = 30
 Ui_MainWindow, _ = uic.loadUiType("patriciasql_main.ui")
@@ -55,6 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connection_config.read_configuration()
         # try to connect (most recent connection)
         self.db_connection = db.PostgreSQLConnection()
+        self.treeView.set_db_connection(self.db_connection)
         self.updateDBConnection(self.connection_config)
         self.vertical_resize = False
 
@@ -65,8 +67,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateDBConnection(self, connection_settings: ConnectionConfig):
         self.db_connection.reconnect(connection_settings)
         self.lbldb.setText("connected to: " + self.db_connection.getCurrentDBName())
-        tables = self.db_connection.get_tables()
-        self.listView.setModel(tables)
+        self.treeView.read_schemas_tables()
 
     def showSettings(self):
         success, new_config = DBSettingsDialog.getConnectionProperties(self.db_connection, self.connection_config)

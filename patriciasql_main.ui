@@ -102,25 +102,7 @@
             <enum>QFrame::Plain</enum>
            </property>
           </widget>
-          <widget class="QListView" name="listView">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>150</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="baseSize">
-            <size>
-             <width>150</width>
-             <height>0</height>
-            </size>
-           </property>
+          <widget class="PgTreeView" name="treeView">
            <property name="frameShadow">
             <enum>QFrame::Plain</enum>
            </property>
@@ -310,6 +292,11 @@
    <class>SQLEditor</class>
    <extends>QPlainTextEdit</extends>
    <header location="global">sqleditor.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PgTreeView</class>
+   <extends>QTreeView</extends>
+   <header location="global">pgtreeview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
