@@ -22,7 +22,7 @@ class PgTreeView(QtWidgets.QTreeView):
         model = self.model()
         item = model.itemFromIndex(index)
         if item.parent() is not None and item.parent().parent() is None:
-            data = model.data(index)
+            data = str(model.data(index)).replace(' (v)', '')
             table_fields = self.get_table_fields(data)
             row_count = table_fields.rowCount()
             for i in range(row_count):
@@ -57,12 +57,17 @@ class PgTreeView(QtWidgets.QTreeView):
         for index in range(rows_count):
             row = model.record(index)
             schema = row.value(0)
+            table_name = row.value(1)
+            table_type = row.value(2)
             if current_schema != schema:
                 current_schema = schema
                 current_parent = QtGui.QStandardItem(schema)
                 current_parent.setEditable(False)
                 root_node.appendRow(current_parent)
-            child = QtGui.QStandardItem(row.value(1))
+            item_data = table_name
+            if 'view' in table_type.lower():
+                item_data += " (v)"
+            child = QtGui.QStandardItem(item_data)
             child.setEditable(False)
             current_parent.appendRow(child)
 
@@ -70,10 +75,9 @@ class PgTreeView(QtWidgets.QTreeView):
 
     def get_tables(self):
         if self.db_connection.isConnectionOpen():
-            query = "select table_schema, table_name from information_schema.tables" \
-                    " where table_type like '%TABLE' " \
-                    "group by table_schema, table_name " \
-                    "order by table_schema, table_name"
+            query = "select table_schema, table_name, table_type from information_schema.tables " \
+                    "group by table_schema, table_name, table_type " \
+                    "order by table_schema, table_name, table_type"
             model, _ = self.db_connection.getModel(query)
             return model
 
