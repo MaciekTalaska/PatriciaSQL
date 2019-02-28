@@ -40,9 +40,18 @@ class PgTreeView(QtWidgets.QTreeView):
                 item.appendRow(new_item)
 
     def read_schemas_tables(self):
-        if self.model() is None or self.model().rowCount() == 0:
-            schemas = self.get_table_schema_hierarchy()
-            self.setModel(schemas)
+        # if self.model() is None or self.model().rowCount() == 0:
+        # TODO: line above is commented because schema and table info has to be refreshed when a different database
+        #       is chosen to connect to. But from a performance perspective (and due to the fact that information on
+        #       tables/views is loaded on demand by issuing SQL query) it would be best to think about not losing
+        #       already obtained info. This could be done by:
+        #       1) Leaving non-public schemas as they are
+        #       2) hiding the public/user schema
+        #       3) show the currently selected schema
+        #       This approach has such an advantage, that switching between schemas will result in no requirement
+        #       for obtaining already retrieved info.
+        schemas = self.get_table_schema_hierarchy()
+        self.setModel(schemas)
 
     def get_table_schema_hierarchy(self):
         model = self.get_tables()
