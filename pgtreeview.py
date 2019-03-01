@@ -50,8 +50,9 @@ class PgTreeView(QtWidgets.QTreeView):
         #       3) show the currently selected schema
         #       This approach has such an advantage, that switching between schemas will result in no requirement
         #       for obtaining already retrieved info.
-        schemas = self.get_table_schema_hierarchy()
-        self.setModel(schemas)
+        if self.db_connection.isConnectionOpen():
+            schemas = self.get_table_schema_hierarchy()
+            self.setModel(schemas)
 
     def get_table_schema_hierarchy(self):
         model = self.get_tables()
