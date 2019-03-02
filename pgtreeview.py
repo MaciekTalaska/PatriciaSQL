@@ -11,17 +11,17 @@ class PgTreeView(QtWidgets.QTreeView):
         self.setExpandsOnDoubleClick(True)
         self.setWordWrap(True)
         self.collapseAll()
-        self.doubleClicked.connect(self.update_treeView)
+        self.doubleClicked.connect(self.update_table_info)
         self.setRootIsDecorated(True)
         self.db_connection = None
 
     def set_db_connection(self, db_connection: PostgreSQLConnection):
         self.db_connection = db_connection
 
-    def update_treeView(self, index):
+    def update_table_info(self, index: QtCore.QModelIndex):
         model = self.model()
         item = model.itemFromIndex(index)
-        if item.parent() is not None and item.parent().parent() is None:
+        if item.parent() is not None and item.parent().parent() is None and item.rowCount() == 0:
             data = str(model.data(index)).replace(' (v)', '')
             table_fields = self.get_table_fields(data)
             row_count = table_fields.rowCount()
