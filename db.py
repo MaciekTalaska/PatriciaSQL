@@ -65,7 +65,7 @@ class PostgreSQLConnection:
         return databases
 
     def connect(self, cp: ConnectionConfig):
-        if (cp.validate_connection_data()):
+        if cp.validate_connection_data():
             self.connection.setHostName(cp.host)
             self.connection.setUserName(cp.user)
             self.connection.setPassword(cp.password)

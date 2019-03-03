@@ -45,13 +45,13 @@ class PgSQLHighlighter(QSyntaxHighlighter):
 
     def highlightBlock(self, text: str):
         text = text.lower()
-        for regx, style in self.rules:
-            match = regx.indexIn(text, 0)
+        for rx, style in self.rules:
+            match = rx.indexIn(text, 0)
             while match > -1:
-                index = regx.pos(0)
-                length = len(regx.cap(0))
+                index = rx.pos(0)
+                length = len(rx.cap(0))
                 self.setFormat(index, length, style)
                 # check if there are any other tokens to be highlighted
-                match = regx.indexIn(text, length + index)
+                match = rx.indexIn(text, length + index)
             continue
         self.setCurrentBlockState(0)

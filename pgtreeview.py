@@ -1,7 +1,10 @@
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
+
 from db import PostgreSQLConnection
+
+VIEW_SUFFIX = ' (v)'
 
 
 class PgTreeView(QtWidgets.QTreeView):
@@ -22,7 +25,7 @@ class PgTreeView(QtWidgets.QTreeView):
         model = self.model()
         item = model.itemFromIndex(index)
         if item.parent() is not None and item.parent().parent() is None and item.rowCount() == 0:
-            data = str(model.data(index)).replace(' (v)', '')
+            data = str(model.data(index)).replace(VIEW_SUFFIX, '')
             table_fields = self.get_table_fields(data)
             row_count = table_fields.rowCount()
             for i in range(row_count):
@@ -33,7 +36,7 @@ class PgTreeView(QtWidgets.QTreeView):
                 if type_length != 0:
                     item_data = "%s (%s [%d])" % (column_name, column_type, type_length)
                 else:
-                    item_data = "%s (%s)" %(column_name, column_type)
+                    item_data = "%s (%s)" % (column_name, column_type)
                 new_item = QtGui.QStandardItem(item_data)
                 new_item.setToolTip(item_data)
                 new_item.setEditable(False)
@@ -76,7 +79,7 @@ class PgTreeView(QtWidgets.QTreeView):
                 root_node.appendRow(current_parent)
             item_data = table_name
             if 'view' in table_type.lower():
-                item_data += " (v)"
+                item_data += VIEW_SUFFIX
             child = QtGui.QStandardItem(item_data)
             child.setEditable(False)
             current_parent.appendRow(child)
